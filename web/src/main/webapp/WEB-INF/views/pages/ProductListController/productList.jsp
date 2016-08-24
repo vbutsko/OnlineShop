@@ -16,10 +16,10 @@
             $(".add_shop").on('click', function () {
                 var mobile = $(this).parent('.mobile_shop');
 
-                var amount = parseInt(mobile.find('.amount_shop').eq(0).val(), 10);
-                var productId = parseInt(mobile.find('.productId_shop').eq(0).val(), 10);
-                var cost = mobile.find('.cost_shop').eq(0).val();
-                var name = mobile.find('.name_shop').eq(0).val();
+                var amount = mobile.find("[name=amount]").val();
+                var productId = mobile.find("[name=productId]").val();
+                var cost = mobile.find("[name=cost]").val();
+                var name = mobile.find("[name=name]").val();
 
                 $.ajax({
                     type: "POST",
@@ -27,7 +27,7 @@
                     data: "amount=" + amount + "&productId=" + productId + "&cost=" + cost + "&name=" + name,
                     success: function (response) {
                         $('#headerTotal').html("${sessionScope.cart.getTotalAmount()} :Amount; ${sessionScope.cart.getTotal()}: Total");
-                        mobile.find('.info_shop').eq(0).html(response);
+                        mobile.find("[name=info]").html(response);
                     },
                     error: function (e) {
                         alert('Error: ' + e);
@@ -53,13 +53,13 @@
                                 <input type="hidden" name="cost" value="${product.getCost()}">
                                 <div id="info" style="color: green;"></div>
                             </sf:form>-->
-                            <input class="amount_shop" size="10" placeholder="amount" type="number" min="1">
+                            <input name="amount" size="10" placeholder="amount" type="number" min="1">
                             <sf:errors path="amount" cssClass="error" />
                             <button class="add_shop">add to cart</button>
-                            <input type="hidden" class="productId_shop" value="${product.getId()}">
-                            <input type="hidden" class="name_shop" value="${product.getName()}">
-                            <input type="hidden" class="cost_shop" value="${product.getCost()}">
-                            <div class="info_shop" style="color: green;"></div>
+                            <input type="hidden" name="productId" value="${product.getId()}">
+                            <input type="hidden" name="name" value="${product.getName()}">
+                            <input type="hidden" name="cost" value="${product.getCost()}">
+                            <div name="info" style="color: green;"></div>
                         </div>
                     </div>
                 </div>
