@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+    <!-- Base Definition -->
+    <definition name="base.definition"
+                template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header" value="/WEB-INF/views/tiles/template/defaultHeader.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/views/tiles/template/defaultMenu.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/views/tiles/template/defaultFooter.jsp" />
+    </definition>
+
+    <!--  HomePage -->
+    <definition name="homePage" extends="base.definition">
+        <put-attribute name="title" value="Welcome" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/HomePageController/home.jsp" />
+    </definition>
+
+    <!-- Product List -->
+    <definition name="productList" extends="base.definition">
+        <put-attribute name="title" value="List of Mobilephones"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/ProductListController/productList.jsp" />
+    </definition>
+
+    <!-- Product Details -->
+    <definition name="productDetails" extends="base.definition">
+        <put-attribute name="title" value="delails"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/ProductDetailsController/productDetails.jsp"/>
+    </definition>
+
+    <!-- Cart Page -->
+    <definition name="cartPage" extends="base.definition">
+        <put-attribute name="title" value="Cart Page"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/CartInfoController/cartPage.jsp"/>
+    </definition>
+    <!-- Order Page -->
+    <definition name="orderPage" extends="base.definition">
+        <put-attribute name="title" value="Order Page"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/orderPage.jsp"/>
+    </definition>
+    <!-- Order Confirmation Page -->
+    <definition name="orderConfirmationPage" extends="base.definition">
+        <put-attribute name="title" value="Confirm Order"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/orderConfirmationPage.jsp"/>
+    </definition>
+
+</tiles-definitions>
