@@ -1,5 +1,6 @@
 package by.expertsoft.butko.model;
 
+import com.sun.xml.internal.ws.dump.MessageDumping;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.format.annotation.NumberFormat;
 
@@ -10,10 +11,8 @@ import javax.validation.constraints.Min;
  */
 public class CartItem {
     @NotNull
-    @Min(1)
+    @Min(value = 1, message = "amount must be positive integer")
     private int amount;
-    @NotNull
-    @Min(1)
     private int productId;
     private double cost;
     private String name;

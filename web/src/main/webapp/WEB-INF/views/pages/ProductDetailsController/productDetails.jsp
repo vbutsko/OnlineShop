@@ -27,9 +27,8 @@
                     data: "amount=" + amount + "&productId=" + productId + "&cost=" + cost + "&name=" + name,
                     success: function (response) {
                         // we have the response
-                        var info = info_shop;
                         $('#info_shop').html(response);
-                        $('#headerTotal').html("${cart.getTotal()}: Total");
+                        $('#headerTotal').html("${sessionScope.cart.getTotalAmount()} :Amount; ${sessionScope.cart.getTotal()}: Total");
                     },
                     error: function (e) {
                         alert('Error: ' + e);

@@ -17,27 +17,34 @@ public class Cart {
     public Cart(){
         cartItemList = new ArrayList<CartItem>();
     }
-    public void addOrder(CartItem order){
-        cartItemList.add(order);
+    public void addCartItem(CartItem cartItem){
+        cartItemList.add(cartItem);
     }
 
-    public void deleteOrder(int order_id){
-        cartItemList.remove(order_id);
+    public void deleteCartItem(int cartItemId){
+        cartItemList.remove(cartItemId);
     }
 
-    public int getOrdersSize(){
+    public int getCartSize(){
         return cartItemList.size();
     }
 
-    public CartItem getOrderById(int id){
+    public CartItem getCartItemById(int id){
         return cartItemList.get(id);
     }
 
     public double getTotal(){
         double total = 0.0;
-        for(CartItem order: cartItemList){
-            total += order.getCost() * order.getAmount();
+        for(CartItem cartItem: cartItemList){
+            total += cartItem.getCost() * cartItem.getAmount();
         }
         return total;
+    }
+    public int getTotalAmount(){
+        int amount = 0;
+        for(CartItem cartItem: cartItemList){
+            amount += cartItem.getAmount();
+        }
+        return amount;
     }
 }

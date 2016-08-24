@@ -9,8 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
-<html>
-    <body>
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script type="text/javascript">
         $(function() {
@@ -27,11 +26,8 @@
                     url: "/web/cart",
                     data: "amount=" + amount + "&productId=" + productId + "&cost=" + cost + "&name=" + name,
                     success: function (response) {
-                        // we have the response
-                        //$('#info_shop').html(response);
-                        //$('.amount_shop').val('');
-                        //$('#headerTotal').html("${cart.getTotal()}: Total");
-                        $(this).parent('.info_shop').html(response);
+                        $('#headerTotal').html("${sessionScope.cart.getTotalAmount()} :Amount; ${sessionScope.cart.getTotal()}: Total");
+                        mobile.find('.info_shop').eq(0).html(response);
                     },
                     error: function (e) {
                         alert('Error: ' + e);
@@ -48,20 +44,25 @@
                             <c:out value="${count.index+1}  " />
                             <a href="<s:url value="/mobilephones/model?id=${product.getId()}"/>"> ${product.getName()} </a>
                         </div>
-                        <div class="col-lg-4 col-lg-offset-3 col-md-5 col-md-offset-2">
-                            <div class="mobile_shop">
-                                <input class="amount_shop" size="10" placeholder="amount" type="number" min="1">
-                                <button class="add_shop">add to cart</button>
-                                <input type="hidden" class="productId_shop" value="${product.getId()}">
-                                <input type="hidden" class="name_shop" value="${product.getName()}">
-                                <input type="hidden" class="cost_shop" value="${product.getCost()}">
-                                <div class="info_shop" style="color: green;"></div>
-                            </div>
+                        <div class="col-lg-4 col-lg-offset-3 col-md-5 col-md-offset-2 mobile_shop">
+                            <!--<sf:form method="post" action="cart" class="mobile_shop" modelAttribute="cartItem">
+                                <input name="amount" size="10" placeholder="amount" type="number" min="1">
+                                <button class="add">add to cart</button>
+                                <input type="hidden" name="productId" value="${product.getId()}">
+                                <input type="hidden" name="name" value="${product.getName()}">
+                                <input type="hidden" name="cost" value="${product.getCost()}">
+                                <div id="info" style="color: green;"></div>
+                            </sf:form>-->
+                            <input class="amount_shop" size="10" placeholder="amount" type="number" min="1">
+                            <sf:errors path="amount" cssClass="error" />
+                            <button class="add_shop">add to cart</button>
+                            <input type="hidden" class="productId_shop" value="${product.getId()}">
+                            <input type="hidden" class="name_shop" value="${product.getName()}">
+                            <input type="hidden" class="cost_shop" value="${product.getCost()}">
+                            <div class="info_shop" style="color: green;"></div>
                         </div>
                     </div>
                 </div>
             </c:forEach>
 
         </div>
-    </body>
-</html>

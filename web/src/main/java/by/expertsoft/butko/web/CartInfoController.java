@@ -17,28 +17,30 @@ import java.util.Map;
 @RequestMapping("/cart")
 public class CartInfoController {
 
+
+
     @RequestMapping(method = RequestMethod.GET)
     public String getCartList(Map<String, Object> model, HttpServletRequest request){
-        Cart cart = (Cart) request.getSession().getAttribute("cart");
-        if(cart == null)
-            cart = new Cart();
-        Cart orderList = new Cart();
-        for(int i = 0; i < cart.getOrdersSize(); i++){
-            orderList.addOrder(new CartItem());
+        Cart cartSession = (Cart) request.getSession().getAttribute("cart");
+        if(cartSession == null)
+            cartSession = new Cart();
+        Cart cart = new Cart();
+        for(int i = 0; i < cartSession.getCartSize(); i++){
+            cart.addCartItem(new CartItem());
         }
-        model.put("orderList", orderList);
+        model.put("cart", cart);
         return "cartPage";
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public @ResponseBody String addProductsToCart(@Valid @ModelAttribute(value="orderInfo")CartItem cartItem, BindingResult resultOrderInfo,
+    public @ResponseBody String addProductsToCart(@Valid @ModelAttribute(value="cartItem")CartItem cartItem, BindingResult resultOrderInfo,
                                                   HttpServletRequest request){
         Cart cart = (Cart) request.getSession().getAttribute("cart");
         if(cart == null)
             cart = new Cart();
         String returnText;
         if(!resultOrderInfo.hasErrors()){
-            cart.addOrder(cartItem);
+            cart.addCartItem(cartItem);
             request.getSession().setAttribute("cart", cart);
             returnText = cartItem.getName() + " x" + cartItem.getAmount() +" now in your Cart.";
         }else{
@@ -50,23 +52,23 @@ public class CartInfoController {
     @RequestMapping(params = "delete", method = RequestMethod.POST)
     public String delete(@RequestParam(required = true) Integer orderId, HttpServletRequest request){
         Cart cart = (Cart) request.getSession().getAttribute("cart");
-        cart.deleteOrder(orderId);
+        cart.deleteCartItem(orderId);
         request.getSession().setAttribute("cart", cart);
         return "redirect:/cart";
     }
 
     @RequestMapping(params = "update", method = RequestMethod.POST)
-    public String update(@ModelAttribute("orderList")Cart orderList,
+    public String update(@ModelAttribute("cart")Cart cart,
                          HttpServletRequest request, BindingResult result){
-        Cart cart =(Cart)request.getSession().getAttribute("cart");
-        for(int i = orderList.getOrdersSize()-1; i >=0; i--){
-            if(orderList.getOrderById(i).getAmount() == 0) {
-                cart.deleteOrder(i);
+        Cart cartSession =(Cart)request.getSession().getAttribute("cart");
+        for(int i = cart.getCartSize()-1; i >=0; i--){
+            if(cart.getCartItemById(i).getAmount() == 0) {
+                cartSession.deleteCartItem(i);
             }else{
-                cart.getOrderById(i).setAmount(orderList.getOrderById(i).getAmount());
+                cartSession.getCartItemById(i).setAmount(cart.getCartItemById(i).getAmount());
             }
         }
-        request.getSession().setAttribute("cart", cart);
+        request.getSession().setAttribute("cart", cartSession);
         return "cartPage";
     }
 }

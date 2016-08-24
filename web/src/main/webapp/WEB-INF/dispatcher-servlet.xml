@@ -36,6 +36,7 @@
         </property>
     </bean>
 
+    <!-- Data Source for NamedParameterJdbcTemplate -->
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
@@ -43,12 +44,20 @@
         <property name="username" value="root"/>
         <property name="password" value="05051968"/>
     </bean>
+
+    <!-- NamedParameterJdbcTemplate for JdbcMobileDao -->
     <bean class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate" id="namedParameterJdbcTemplate">
         <constructor-arg type="javax.sql.DataSource" ref="dataSource"/>
     </bean>
 
+    <!-- JdbcMobileDao for controllers -->
     <bean id="daoService" class="by.expertsoft.butko.dao.JdbcMobileDao">
         <property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate" />
+    </bean>
+
+    <!-- object of Cart to story in session -->
+    <bean id="cart" class="by.expertsoft.butko.model.Cart" scope="session">
+        <aop:scoped-proxy/>
     </bean>
 
 </beans>
