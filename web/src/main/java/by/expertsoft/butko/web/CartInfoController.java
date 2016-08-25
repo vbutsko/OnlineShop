@@ -3,10 +3,12 @@ package by.expertsoft.butko.web;
 import by.expertsoft.butko.dao.DAO;
 import by.expertsoft.butko.model.Cart;
 import by.expertsoft.butko.model.CartItem;
+import by.expertsoft.butko.model.JsonResponse;
 import by.expertsoft.butko.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,16 +37,18 @@ public class CartInfoController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public @ResponseBody String addProductsToCart(@Valid @ModelAttribute(value="cartItem")CartItem cartItem, BindingResult resultOrderInfo,
-                                                  HttpServletRequest request){
-        String returnText;
-        if(!resultOrderInfo.hasErrors()){
+    public @ResponseBody JsonResponse addProductsToCart(@Valid @ModelAttribute(value="cartItem")CartItem cartItem, BindingResult resultCartItem,
+                                   HttpServletRequest request){
+        JsonResponse jsonResponse = new JsonResponse();
+        if(!resultCartItem.hasErrors()){
             cartService.addCartItem(request,cartItem);
-            returnText = cartItem.getName() + " x" + cartItem.getAmount() +" now in your Cart.";
+            jsonResponse.setStatus("SUCCESS");
+            jsonResponse.setResult(cartItem.getName() + " x" + cartItem.getAmount() +" now in your Cart.");
         }else{
-            returnText = "Sorry, an error has occur. Products have not been added to cart.";
+            jsonResponse.setStatus("FAIL");
+            jsonResponse.setResult("amount must be integer greater or equals than 1");
         }
-        return returnText;
+        return jsonResponse;
     }
 
     @RequestMapping(params = "delete", method = RequestMethod.POST)
@@ -58,11 +62,7 @@ public class CartInfoController {
                          HttpServletRequest request, BindingResult result){
         Cart cartSession = cartService.getCart(request);
         for(int i = cart.getCartSize()-1; i >=0; i--){
-            if(cart.getCartItemById(i).getAmount() == 0) {
-                cartSession.deleteCartItem(i);
-            }else{
-                cartSession.getCartItemById(i).setAmount(cart.getCartItemById(i).getAmount());
-            }
+            cartSession.getCartItemById(i).setAmount(cart.getCartItemById(i).getAmount());
         }
         cartService.setCart(request, cartSession);
         return "cartPage";

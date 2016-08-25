@@ -1,17 +1,18 @@
 package by.expertsoft.butko.model;
 
 import com.sun.xml.internal.ws.dump.MessageDumping;
+import org.intellij.lang.annotations.RegExp;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.format.annotation.NumberFormat;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 
 /**
  * Created by wladek on 17.08.16.
  */
 public class CartItem {
-    @NotNull
-    @Min(value = 1, message = "amount must be positive integer")
+    @Min(value = 1, message = "amount must be integer >= 1")
     private int amount;
     private int productId;
     private String name;

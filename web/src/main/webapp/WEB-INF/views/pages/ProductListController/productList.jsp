@@ -27,7 +27,13 @@
                     data: "amount=" + amount + "&productId=" + productId + "&cost=" + cost + "&name=" + name,
                     success: function (response) {
                         $('#headerTotal').html("${sessionScope.cart.getTotalAmount()} :Amount; ${sessionScope.cart.getTotal()}: Total");
-                        mobile.find("[name=info]").html(response);
+                        var message = response.result;
+                        if(response.status == "SUCCESS")
+                            message = "<p style=\"color:green\">" + message + "</p>";
+                        else
+                            message = "<p style=\"color:red\">" + message + "</p>";
+                        mobile.find("[name=info]").html(message);
+                        $('#headerTotal').html("${sessionScope.cart.getTotalAmount()} :Amount; ${sessionScope.cart.getTotal()}: Total");
                     },
                     error: function (e) {
                         alert('Error: ' + e);
@@ -58,7 +64,7 @@
                             <button class="add_shop">add to cart</button>
                             <input type="hidden" name="productId" value="${product.getId()}">
                             <input type="hidden" name="name" value="${product.getName()}">
-                            <div name="info" style="color: green;"></div>
+                            <div name="info"></div>
                         </div>
                     </div>
                 </div>

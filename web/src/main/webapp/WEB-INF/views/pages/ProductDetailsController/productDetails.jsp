@@ -27,7 +27,12 @@
                     data: "amount=" + amount + "&productId=" + productId + "&cost=" + cost + "&name=" + name,
                     success: function (response) {
                         // we have the response
-                        mobile.find("[name=info]").html(response);
+                        var message = response.result;
+                        if(response.status == "SUCCESS")
+                            message = "<p style=\"color:green\">" + message + "</p>";
+                        else
+                            message = "<p style=\"color:red\">" + message + "</p>";
+                        mobile.find("[name=info]").html(message);
                         $('#headerTotal').html("${sessionScope.cart.getTotalAmount()} :Amount; ${sessionScope.cart.getTotal()}: Total");
                     },
                     error: function (e) {
@@ -60,7 +65,7 @@
                     <button class="add_shop">add to cart</button>
                     <input type="hidden" name="productId" value="${productDetails.getId()}">
                     <input type="hidden" name="name" value="${productDetails.getName()}">
-                    <div name="info" style="color: green;"></div>
+                    <div name="info"></div>
                 <!--</sf:form>-->
             </div>
         </div>
