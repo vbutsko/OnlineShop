@@ -3,6 +3,7 @@ package by.expertsoft.butko.web;
 import by.expertsoft.butko.dao.DAO;
 import by.expertsoft.butko.model.Cart;
 import by.expertsoft.butko.model.CartItem;
+import by.expertsoft.butko.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -20,16 +21,11 @@ import java.util.Map;
 public class CartInfoController {
 
     @Autowired
-    private DAO daoService;
+    private CartService cartService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String getCartList(Map<String, Object> model, HttpServletRequest request){
-        Cart cartSession = (Cart) request.getSession().getAttribute("cart");
-        if(cartSession == null) {
-            cartSession = new Cart();
-            cartSession.setDaoService(daoService);
-            request.getSession().setAttribute("cart", cartSession);
-        }
+        Cart cartSession = cartService.getCart(request); //(Cart) request.getSession().getAttribute("cart");
         Cart cart = new Cart();
         for(int i = 0; i < cartSession.getCartSize(); i++){
             cart.addCartItem(new CartItem());
@@ -42,10 +38,6 @@ public class CartInfoController {
     public @ResponseBody String addProductsToCart(@Valid @ModelAttribute(value="cartItem")CartItem cartItem, BindingResult resultOrderInfo,
                                                   HttpServletRequest request){
         Cart cart = (Cart) request.getSession().getAttribute("cart");
-        if(cart == null) {
-            cart = new Cart();
-            cart.setDaoService(daoService);
-        }
         String returnText;
         if(!resultOrderInfo.hasErrors()){
             cart.addCartItem(cartItem);
