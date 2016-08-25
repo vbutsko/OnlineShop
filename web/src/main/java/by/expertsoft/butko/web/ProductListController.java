@@ -17,13 +17,8 @@ import java.util.Map;
 @RequestMapping("/mobilephones")
 @Scope("session")
 public class ProductListController {
-
-    private DAO daoService;
-
     @Autowired
-    public ProductListController(DAO daoService){
-        this.daoService = daoService;
-    }
+    private DAO daoService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String showMobilephonesList(Map<String, Object> model){

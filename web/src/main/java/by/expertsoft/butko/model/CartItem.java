@@ -14,7 +14,6 @@ public class CartItem {
     @Min(value = 1, message = "amount must be positive integer")
     private int amount;
     private int productId;
-    private double cost;
     private String name;
 
     public int getProductId() {
@@ -23,14 +22,6 @@ public class CartItem {
 
     public void setProductId(int productId) {
         this.productId = productId;
-    }
-
-    public double getCost() {
-        return cost;
-    }
-
-    public void setCost(double cost) {
-        this.cost = cost;
     }
 
     public String getName() {

@@ -55,9 +55,4 @@
         <property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate" />
     </bean>
 
-    <!-- object of Cart to story in session -->
-    <bean id="cart" class="by.expertsoft.butko.model.Cart" scope="session">
-        <aop:scoped-proxy/>
-    </bean>
-
 </beans>

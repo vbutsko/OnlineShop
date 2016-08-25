@@ -60,7 +60,6 @@
                     <button class="add_shop">add to cart</button>
                     <input type="hidden" name="productId" value="${productDetails.getId()}">
                     <input type="hidden" name="name" value="${productDetails.getName()}">
-                    <input type="hidden" name="cost" value="${productDetails.getCost()}">
                     <div name="info" style="color: green;"></div>
                 <!--</sf:form>-->
             </div>

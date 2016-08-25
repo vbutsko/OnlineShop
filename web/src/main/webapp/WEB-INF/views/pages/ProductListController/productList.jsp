@@ -58,7 +58,6 @@
                             <button class="add_shop">add to cart</button>
                             <input type="hidden" name="productId" value="${product.getId()}">
                             <input type="hidden" name="name" value="${product.getName()}">
-                            <input type="hidden" name="cost" value="${product.getCost()}">
                             <div name="info" style="color: green;"></div>
                         </div>
                     </div>
