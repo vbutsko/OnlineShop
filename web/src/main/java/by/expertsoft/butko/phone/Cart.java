@@ -1,6 +1,6 @@
-package by.expertsoft.butko.model;
+package by.expertsoft.butko.phone;
 
-import by.expertsoft.butko.dao.DAO;
+import by.expertsoft.butko.dao.GenericDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Cart {
 
-    private DAO daoService;
+    private GenericDao daoService;
 
     private List<CartItem> cartItemList;
 
@@ -41,7 +41,7 @@ public class Cart {
     public double getTotal(){
         double total = 0.0;
         for(CartItem cartItem: cartItemList){
-            total += ((Mobile)daoService.getById(cartItem.getProductId())).getCost() * cartItem.getAmount();
+            total += ((Phone)daoService.getById(cartItem.getProductId())).getPrice() * cartItem.getAmount();
         }
         return total;
     }
@@ -53,7 +53,7 @@ public class Cart {
         return amount;
     }
 
-    public void setDaoService(DAO daoService) {
+    public void setDaoService(GenericDao daoService) {
         this.daoService = daoService;
     }
 }

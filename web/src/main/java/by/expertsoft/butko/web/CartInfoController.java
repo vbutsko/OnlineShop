@@ -1,9 +1,8 @@
 package by.expertsoft.butko.web;
 
-import by.expertsoft.butko.dao.DAO;
-import by.expertsoft.butko.model.Cart;
-import by.expertsoft.butko.model.CartItem;
-import by.expertsoft.butko.model.JsonResponse;
+import by.expertsoft.butko.phone.Cart;
+import by.expertsoft.butko.phone.CartItem;
+import by.expertsoft.butko.phone.JsonResponse;
 import by.expertsoft.butko.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

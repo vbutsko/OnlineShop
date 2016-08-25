@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by wladek on 09.08.16.
  */
-public interface DAO<T> {
+public interface GenericDao<T> {
     void insert(T t);
     T getById(Integer id);
     void remove(T t);
