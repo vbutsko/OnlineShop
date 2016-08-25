@@ -21,7 +21,7 @@
                             </div>
                             <div class="col-lg-4 col-lg-offset-3 col-md-5 col-md-offset-2">
                                 <input type="number" min="1" name="cartItemList[${count.index}].amount" value="${sessionScope.cart.cartItemList[count.index].getAmount()}"/>
-                                <button formaction="cart?orderId=${count.index}" type="submit" name="delete" onclick="return confirm('Are you sure you want to delete ${product.getName()} x${product.getAmount()} from cart?')">delete</button>
+                                <button formaction="cart?cartItemId=${count.index}" type="submit" name="delete" onclick="return confirm('Are you sure you want to delete ${product.getName()} x${product.getAmount()} from cart?')">delete</button>
                             </div>
                         </div>
                     </div>

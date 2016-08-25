@@ -37,11 +37,9 @@ public class CartInfoController {
     @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody String addProductsToCart(@Valid @ModelAttribute(value="cartItem")CartItem cartItem, BindingResult resultOrderInfo,
                                                   HttpServletRequest request){
-        Cart cart = (Cart) request.getSession().getAttribute("cart");
         String returnText;
         if(!resultOrderInfo.hasErrors()){
-            cart.addCartItem(cartItem);
-            request.getSession().setAttribute("cart", cart);
+            cartService.addCartItem(request,cartItem);
             returnText = cartItem.getName() + " x" + cartItem.getAmount() +" now in your Cart.";
         }else{
             returnText = "Sorry, an error has occur. Products have not been added to cart.";
@@ -50,17 +48,15 @@ public class CartInfoController {
     }
 
     @RequestMapping(params = "delete", method = RequestMethod.POST)
-    public String delete(@RequestParam(required = true) Integer orderId, HttpServletRequest request){
-        Cart cart = (Cart) request.getSession().getAttribute("cart");
-        cart.deleteCartItem(orderId);
-        request.getSession().setAttribute("cart", cart);
+    public String delete(@RequestParam(required = true) Integer cartItemId, HttpServletRequest request){
+        cartService.deleteCartItem(request, cartItemId);
         return "redirect:/cart";
     }
 
     @RequestMapping(params = "update", method = RequestMethod.POST)
     public String update(@ModelAttribute("cart")Cart cart,
                          HttpServletRequest request, BindingResult result){
-        Cart cartSession =(Cart)request.getSession().getAttribute("cart");
+        Cart cartSession = cartService.getCart(request);
         for(int i = cart.getCartSize()-1; i >=0; i--){
             if(cart.getCartItemById(i).getAmount() == 0) {
                 cartSession.deleteCartItem(i);
@@ -68,7 +64,7 @@ public class CartInfoController {
                 cartSession.getCartItemById(i).setAmount(cart.getCartItemById(i).getAmount());
             }
         }
-        request.getSession().setAttribute("cart", cartSession);
+        cartService.setCart(request, cartSession);
         return "cartPage";
     }
 }

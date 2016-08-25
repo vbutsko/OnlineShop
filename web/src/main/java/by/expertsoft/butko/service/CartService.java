@@ -21,7 +21,7 @@ public class CartService {
         this.daoService = daoService;
     }
 
-    public void addProduct(HttpServletRequest request, CartItem cartItem){
+    public void addCartItem(HttpServletRequest request, CartItem cartItem){
         Cart cart = getCart(request);
         cart.addCartItem(cartItem);
         setCart(request, cart);
@@ -37,5 +37,10 @@ public class CartService {
     }
     public void setCart(HttpServletRequest request ,Cart cart){
         request.getSession().setAttribute("cart", cart);
+    }
+    public void deleteCartItem(HttpServletRequest request, int cartItemId){
+        Cart cart = getCart(request);
+        cart.deleteCartItem(cartItemId);
+        setCart(request, cart);
     }
 }
