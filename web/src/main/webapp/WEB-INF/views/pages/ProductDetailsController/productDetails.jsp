@@ -32,7 +32,7 @@
                         else
                             message = "<p style=\"color:red\">" + message + "</p>";
                         phone.find("[name=info]").html(message);
-                        $('#headerTotal').html("${sessionScope.cart.getTotalAmount()} :Amount; ${sessionScope.cart.getTotal()}: Total");
+                        $('#headerTotal').html(response.statusBar);
                     },
                     error: function (e) {
                         alert('Error: ' + e);

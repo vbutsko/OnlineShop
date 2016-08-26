@@ -47,10 +47,12 @@ public class CartInfoController {
             jsonResponse.setStatus("FAIL");
             jsonResponse.setResult("amount must be integer greater or equals than 1");
         }
+        jsonResponse.setStatusBar(cartService.getCart(request).getTotalAmount() + " :Amount; "
+                                + cartService.getCart(request).getTotal() + ": Total");
         return jsonResponse;
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(params = "delete", method = RequestMethod.POST)
     public String delete(@RequestParam(required = true) Integer cartItemId, HttpServletRequest request){
         cartService.deleteCartItem(request, cartItemId);
         return "redirect:/cart";

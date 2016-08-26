@@ -25,14 +25,13 @@
                     url: "/web/cart",
                     data: "amount=" + amount + "&productId=" + productId + "&name=" + name,
                     success: function (response) {
-                        $('#headerTotal').html("${sessionScope.cart.getTotalAmount()} :Amount; ${sessionScope.cart.getTotal()}: Total");
                         var message = response.result;
                         if(response.status == "SUCCESS")
                             message = "<p style=\"color:green\">" + message + "</p>";
                         else
                             message = "<p style=\"color:red\">" + message + "</p>";
                         phone.find("[name=info]").html(message);
-                        $('#headerTotal').html("${sessionScope.cart.getTotalAmount()} :Amount; ${sessionScope.cart.getTotal()}: Total");
+                        $('#headerTotal').html(response.statusBar);
                     },
                     error: function (e) {
                         alert('Error: ' + e);
@@ -50,13 +49,6 @@
                             <a href="<s:url value="/mobilephones/model?id=${product.getId()}"/>"> ${product.getName()} </a>
                         </div>
                         <div class="col-lg-4 col-lg-offset-3 col-md-5 col-md-offset-2 mobile_shop">
-                            <!--<sf:form method="post" action="cart" class="mobile_shop" modelAttribute="cartItem">
-                                <input name="amount" size="10" placeholder="amount" type="number" min="1">
-                                <button class="add">add to cart</button>
-                                <input type="hidden" name="productId" value="${product.getId()}">
-                                <input type="hidden" name="name" value="${product.getName()}">
-                                <div id="info" style="color: green;"></div>
-                            </sf:form>-->
                             <input name="amount" size="10" placeholder="amount" type="number" min="1">
                             <sf:errors path="amount" cssClass="error" />
                             <button class="add_shop">add to cart</button>
