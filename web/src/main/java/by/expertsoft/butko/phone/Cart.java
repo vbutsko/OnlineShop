@@ -2,6 +2,7 @@ package by.expertsoft.butko.phone;
 
 import by.expertsoft.butko.dao.GenericDao;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,10 +39,10 @@ public class Cart {
         return cartItemList.get(id);
     }
 
-    public double getTotal(){
-        double total = 0.0;
+    public BigDecimal getTotal(){
+        BigDecimal total = new BigDecimal(0);
         for(CartItem cartItem: cartItemList){
-            total += ((Phone)daoService.getById(cartItem.getProductId())).getPrice() * cartItem.getAmount();
+            total = total.add(((Phone)daoService.getById(cartItem.getProductId())).getPrice().multiply(BigDecimal.valueOf(cartItem.getAmount())));
         }
         return total;
     }

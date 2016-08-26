@@ -18,13 +18,12 @@
 
                 var amount = phone.find("[name=amount]").val();
                 var productId = phone.find("[name=productId]").val();
-                var price = phone.find("[name=price]").val();
                 var name = phone.find("[name=name]").val();
 
                 $.ajax({
                     type: "POST",
                     url: "/web/cart",
-                    data: "amount=" + amount + "&productId=" + productId + "&price=" + price + "&name=" + name,
+                    data: "amount=" + amount + "&productId=" + productId + "&name=" + name,
                     success: function (response) {
                         $('#headerTotal').html("${sessionScope.cart.getTotalAmount()} :Amount; ${sessionScope.cart.getTotal()}: Total");
                         var message = response.result;
@@ -56,7 +55,6 @@
                                 <button class="add">add to cart</button>
                                 <input type="hidden" name="productId" value="${product.getId()}">
                                 <input type="hidden" name="name" value="${product.getName()}">
-                                <input type="hidden" name="price" value="${product.getCost()}">
                                 <div id="info" style="color: green;"></div>
                             </sf:form>-->
                             <input name="amount" size="10" placeholder="amount" type="number" min="1">

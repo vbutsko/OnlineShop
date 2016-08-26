@@ -18,13 +18,12 @@
 
                 var amount = phone.find("[name=amount]").val();
                 var productId = phone.find("[name=productId]").val();
-                var price = phone.find("[name=price]").val();
                 var name = phone.find("[name=name]").val();
 
                 $.ajax({
                     type: "POST",
                     url: "/web/cart",
-                    data: "amount=" + amount + "&productId=" + productId + "&price=" + price + "&name=" + name,
+                    data: "amount=" + amount + "&productId=" + productId + "&name=" + name,
                     success: function (response) {
                         // we have the response
                         var message = response.result;
@@ -47,15 +46,15 @@
                 <caption align="center">Characteristics</caption>
                 <tr>
                     <td>Name   </td>
-                    <td>${productDetails.getName()}</td>
+                    <td>${productDetails.name}</td>
                 </tr>
                 <tr>
                     <td>Producer  </td>
-                    <td>${productDetails.getProducer().getProducer_name()}</td>
+                    <td>${productDetails.manufacturer.name}</td>
                 </tr>
                 <tr>
                     <td>Cost   </td>
-                    <td>${productDetails.getCost()}</td>
+                    <td>${productDetails.price}</td>
                 </tr>
             </table>
             <div class="pull-right mobile_shop">
@@ -63,8 +62,8 @@
                     <input name="amount" size="10" placeholder="amount" type="number" min="1">
                     <sf:errors path="amount" cssClass="error" />
                     <button class="add_shop">add to cart</button>
-                    <input type="hidden" name="productId" value="${productDetails.getId()}">
-                    <input type="hidden" name="name" value="${productDetails.getName()}">
+                    <input type="hidden" name="productId" value="${productDetails.id}">
+                    <input type="hidden" name="name" value="${productDetails.name}">
                     <div name="info"></div>
                 <!--</sf:form>-->
             </div>

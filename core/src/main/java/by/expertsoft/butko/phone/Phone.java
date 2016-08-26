@@ -18,10 +18,10 @@ public class Phone
 
     }
 
-    public Phone(int id, String name, BigDecimal cost, Manufacturer manufacturer){
+    public Phone(int id, String name, BigDecimal price, Manufacturer manufacturer){
         this.id = id;
         this.name = name;
-        this.price = cost;
+        this.price = price;
         this.manufacturer = manufacturer;
     }
 

@@ -11,7 +11,7 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <div class="container-fluid">
     <h1>Online Shop. Choose your mobilephone.</h1>
-    <p class="pull-right" id="headerTotal">${sessionScope.cart.getTotalAmount()} :Amount; ${sessionScope.cart.getTotal()}: Total</p>
+    <p class="pull-right" id="headerTotal">${sessionScope.cart.getTotalAmount()} :Amount; ${sessionScope.cart.getTotal().toString()}: Total</p>
     <br/>
 
 </div>

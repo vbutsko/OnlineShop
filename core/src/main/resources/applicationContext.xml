@@ -13,7 +13,7 @@
         <constructor-arg type="javax.sql.DataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="mobileDao" class="by.expertsoft.butko.dao.phone.JdbcPhoneDao">
+    <bean id="jdbcPhoneDao" class="by.expertsoft.butko.dao.phone.JdbcPhoneDao">
         <property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate" />
     </bean>
 </beans>
