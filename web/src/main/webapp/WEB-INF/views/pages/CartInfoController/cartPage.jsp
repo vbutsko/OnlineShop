@@ -12,23 +12,27 @@
 <html>
     <body>
         <div class="container-fluid">
-            <sf:form method="post" action="/web/cart">
-                <c:forEach var="product" items="${cart.cartItemList}" varStatus="count">
-                    <div class="list-group-item">
-                        <div class="row">
-                            <div class="col-lg-5 col-md-5">
-                                <p >${count.index+1} : ${sessionScope.cart.cartItemList[count.index].getName()}</p>
-                            </div>
-                            <div class="col-lg-4 col-lg-offset-3 col-md-5 col-md-offset-2">
-                                <input type="number" min="1" name="cartItemList[${count.index}].amount" value="${sessionScope.cart.cartItemList[count.index].getAmount()}"/>
-                                <button formaction="cart?cartItemId=${count.index}" type="submit" name="delete" onclick="return confirm('Are you sure you want to delete ${product.getName()} x${product.getAmount()} from cart?')">delete</button>
+            <sf:form method="post" action="/web/cart" modelAttribute="cart" methodParam="update">
+                <fieldset>
+                    <c:forEach var="product" items="${sessionScope.cart.cartItemList}" varStatus="count">
+                        <div class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-5 col-md-5">
+                                    <p >${count.index+1} : ${product.name}</p>
+                                </div>
+                                <div class="col-lg-4 col-lg-offset-3 col-md-5 col-md-offset-2">
+                                    <sf:input placeholder=" amount" path="cartItemList[${count.index}].amount" value="${product.amount}"/>
+                                    <button formaction="cart/delete?cartItemId=${count.index}" type="submit" name="delete" onclick="return confirm('Are you sure you want to delete ${product.getName()} x${product.getAmount()} from cart?')">delete</button>
+                                    <br/>
+                                    <sf:errors path="cartItemList[${count.index}].amount" cssClass="error" cssStyle="color:red"/>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </c:forEach>
-                <c:if test="${sessionScope.cart.getCartSize() > 0}">
-                    <input class="pull-right" type="submit" name="update" value="Update"/>
-                </c:if>
+                    </c:forEach>
+                    <c:if test="${sessionScope.cart.getCartSize() > 0}">
+                        <input class="pull-right" type="submit" name="update" value="Update"/>
+                    </c:if>
+                </fieldset>
             </sf:form>
             <div class="row">
                 <c:out value="Total: ${sessionScope.cart.getTotal()}"/>

@@ -50,20 +50,24 @@ public class CartInfoController {
         return jsonResponse;
     }
 
-    @RequestMapping(params = "delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public String delete(@RequestParam(required = true) Integer cartItemId, HttpServletRequest request){
         cartService.deleteCartItem(request, cartItemId);
         return "redirect:/cart";
     }
 
     @RequestMapping(params = "update", method = RequestMethod.POST)
-    public String update(@ModelAttribute("cart")Cart cart,
-                         HttpServletRequest request, BindingResult result){
-        Cart cartSession = cartService.getCart(request);
-        for(int i = cart.getCartSize()-1; i >=0; i--){
-            cartSession.getCartItemById(i).setAmount(cart.getCartItemById(i).getAmount());
+    public String update(@Valid@ModelAttribute("cart")Cart cart, BindingResult resultCart,
+                         HttpServletRequest request){
+        if(resultCart.hasErrors()) {
+            return "cartPage";
+        }else{
+            Cart cartSession = cartService.getCart(request);
+            for (int i = cart.getCartSize() - 1; i >= 0; i--) {
+                cartSession.getCartItemById(i).setAmount(cart.getCartItemById(i).getAmount());
+            }
+            cartService.setCart(request, cartSession);
+            return "redirect:/cart";
         }
-        cartService.setCart(request, cartSession);
-        return "cartPage";
     }
 }

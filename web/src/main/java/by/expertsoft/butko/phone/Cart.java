@@ -2,6 +2,7 @@ package by.expertsoft.butko.phone;
 
 import by.expertsoft.butko.dao.GenericDao;
 
+import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ public class Cart {
 
     private GenericDao daoService;
 
+    @Valid
     private List<CartItem> cartItemList;
 
     public void setCartItemList(List<CartItem> cartItemList){
