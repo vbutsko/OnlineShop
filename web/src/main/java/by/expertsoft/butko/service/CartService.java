@@ -1,8 +1,8 @@
 package by.expertsoft.butko.service;
 
-import by.expertsoft.butko.dao.DAO;
-import by.expertsoft.butko.model.Cart;
-import by.expertsoft.butko.model.CartItem;
+import by.expertsoft.butko.dao.GenericDao;
+import by.expertsoft.butko.phone.Cart;
+import by.expertsoft.butko.phone.CartItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 @Service
 public class CartService {
 
-    private DAO daoService;
+    private GenericDao daoService;
 
     @Autowired
-    public void setDaoService(DAO daoService){
+    public void setDaoService(GenericDao daoService){
         this.daoService = daoService;
     }
 

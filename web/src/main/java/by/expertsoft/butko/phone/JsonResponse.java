@@ -1,4 +1,4 @@
-package by.expertsoft.butko.model;
+package by.expertsoft.butko.phone;
 
 /**
  * Created by wladek on 25.08.16.

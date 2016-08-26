@@ -1,4 +1,4 @@
-package by.expertsoft.butko.model;
+package by.expertsoft.butko.phone;
 
 import com.sun.xml.internal.ws.dump.MessageDumping;
 import org.intellij.lang.annotations.RegExp;

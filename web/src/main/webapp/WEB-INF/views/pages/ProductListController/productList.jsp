@@ -1,4 +1,4 @@
-<%@ page import="by.expertsoft.butko.model.Mobile" %><%--
+<%@ page import="by.expertsoft.butko.phone.Phone" %><%--
   Created by IntelliJ IDEA.
   User: wladek
   Date: 12.08.16
@@ -14,17 +14,17 @@
     <script type="text/javascript">
         $(function() {
             $(".add_shop").on('click', function () {
-                var mobile = $(this).parent('.mobile_shop');
+                var phone = $(this).parent('.mobile_shop');
 
-                var amount = mobile.find("[name=amount]").val();
-                var productId = mobile.find("[name=productId]").val();
-                var cost = mobile.find("[name=cost]").val();
-                var name = mobile.find("[name=name]").val();
+                var amount = phone.find("[name=amount]").val();
+                var productId = phone.find("[name=productId]").val();
+                var price = phone.find("[name=price]").val();
+                var name = phone.find("[name=name]").val();
 
                 $.ajax({
                     type: "POST",
                     url: "/web/cart",
-                    data: "amount=" + amount + "&productId=" + productId + "&cost=" + cost + "&name=" + name,
+                    data: "amount=" + amount + "&productId=" + productId + "&price=" + price + "&name=" + name,
                     success: function (response) {
                         $('#headerTotal').html("${sessionScope.cart.getTotalAmount()} :Amount; ${sessionScope.cart.getTotal()}: Total");
                         var message = response.result;
@@ -32,7 +32,7 @@
                             message = "<p style=\"color:green\">" + message + "</p>";
                         else
                             message = "<p style=\"color:red\">" + message + "</p>";
-                        mobile.find("[name=info]").html(message);
+                        phone.find("[name=info]").html(message);
                         $('#headerTotal').html("${sessionScope.cart.getTotalAmount()} :Amount; ${sessionScope.cart.getTotal()}: Total");
                     },
                     error: function (e) {
@@ -56,7 +56,7 @@
                                 <button class="add">add to cart</button>
                                 <input type="hidden" name="productId" value="${product.getId()}">
                                 <input type="hidden" name="name" value="${product.getName()}">
-                                <input type="hidden" name="cost" value="${product.getCost()}">
+                                <input type="hidden" name="price" value="${product.getCost()}">
                                 <div id="info" style="color: green;"></div>
                             </sf:form>-->
                             <input name="amount" size="10" placeholder="amount" type="number" min="1">

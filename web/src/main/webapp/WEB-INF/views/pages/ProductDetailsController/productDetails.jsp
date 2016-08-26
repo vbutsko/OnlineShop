@@ -14,17 +14,17 @@
     <script type="text/javascript">
         $(function() {
             $(".add_shop").on('click', function () {
-                var mobile = $(this).parent('.mobile_shop');
+                var phone = $(this).parent('.mobile_shop');
 
-                var amount = mobile.find("[name=amount]").val();
-                var productId = mobile.find("[name=productId]").val();
-                var cost = mobile.find("[name=cost]").val();
-                var name = mobile.find("[name=name]").val();
+                var amount = phone.find("[name=amount]").val();
+                var productId = phone.find("[name=productId]").val();
+                var price = phone.find("[name=price]").val();
+                var name = phone.find("[name=name]").val();
 
                 $.ajax({
                     type: "POST",
                     url: "/web/cart",
-                    data: "amount=" + amount + "&productId=" + productId + "&cost=" + cost + "&name=" + name,
+                    data: "amount=" + amount + "&productId=" + productId + "&price=" + price + "&name=" + name,
                     success: function (response) {
                         // we have the response
                         var message = response.result;
@@ -32,7 +32,7 @@
                             message = "<p style=\"color:green\">" + message + "</p>";
                         else
                             message = "<p style=\"color:red\">" + message + "</p>";
-                        mobile.find("[name=info]").html(message);
+                        phone.find("[name=info]").html(message);
                         $('#headerTotal').html("${sessionScope.cart.getTotalAmount()} :Amount; ${sessionScope.cart.getTotal()}: Total");
                     },
                     error: function (e) {

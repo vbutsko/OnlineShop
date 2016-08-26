@@ -1,8 +1,8 @@
 package by.expertsoft.butko;
 
-import by.expertsoft.butko.dao.DAO;
-import by.expertsoft.butko.model.Mobile;
-import by.expertsoft.butko.model.Producer;
+import by.expertsoft.butko.dao.GenericDao;
+import by.expertsoft.butko.phone.Phone;
+import by.expertsoft.butko.phone.Manufacturer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -12,15 +12,15 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Main {
     public static void main(String[] args){
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        DAO mobileDao = (DAO) context.getBean("MobileDAO");
-        Mobile mobile1 = new Mobile(4, "iphone SE", 40, new Producer(4, "Apple"));
-        mobileDao.insert(mobile1);
-        /*mobileDao.remove(mobile1);
-        List<Mobile> mobiles = mobileDao.getList();
-        for(Mobile mob: mobiles) {
+        GenericDao mobileDao = (GenericDao) context.getBean("MobileDAO");
+        Phone phone1 = new Phone(4, "iphone SE", 40, new Manufacturer(4, "Apple"));
+        mobileDao.insert(phone1);
+        /*mobileDao.remove(phone1);
+        List<Phone> mobiles = mobileDao.getList();
+        for(Phone mob: mobiles) {
             System.out.println(mob.getId() + " "+mob.getName());
         }*/
-        System.out.println(mobile1.getId());
+        System.out.println(phone1.getId());
         context.close();
     }
 }

@@ -1,7 +1,7 @@
 package by.expertsoft.butko.web;
 
-import by.expertsoft.butko.dao.DAO;
-import by.expertsoft.butko.model.Mobile;
+import by.expertsoft.butko.dao.GenericDao;
+import by.expertsoft.butko.phone.Phone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,12 +17,12 @@ import java.util.Map;
 @RequestMapping("/mobilephones/model")
 public class ProductDetailsController {
     @Autowired
-    private DAO daoService;
+    private GenericDao daoService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String getMobilephone(@RequestParam int id, Map<String, Object> model){
-        Mobile mobile = (Mobile)daoService.getById(id);
-        model.put("productDetails", mobile);
+        Phone phone = (Phone)daoService.getById(id);
+        model.put("productDetails", phone);
         return "productDetails";
     }
 }

@@ -1,10 +1,9 @@
 package by.expertsoft.butko.tools;
 
-import by.expertsoft.butko.model.Mobile;
-import by.expertsoft.butko.model.Producer;
+import by.expertsoft.butko.phone.Phone;
+import by.expertsoft.butko.phone.Manufacturer;
 import org.springframework.jdbc.core.RowMapper;
 
-import javax.swing.tree.TreePath;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -12,15 +11,15 @@ import java.sql.SQLException;
  * Created by wladek on 11.08.16.
  */
 public class MobileMapper implements RowMapper {
-    public Mobile mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Producer producer = new Producer();
-        producer.setProducer_id(rs.getInt("producer_id"));
-        producer.setProducer_name(rs.getString("producer_name"));
-        Mobile mobile = new Mobile();
-        mobile.setProducer(producer);
-        mobile.setCost(rs.getDouble("cost"));
-        mobile.setId(rs.getInt("mobile_id"));
-        mobile.setName(rs.getString("name"));
-        return mobile;
+    public Phone mapRow(ResultSet rs, int rowNum) throws SQLException {
+        Manufacturer manufacturer = new Manufacturer();
+        manufacturer.setId(rs.getInt("producer_id"));
+        manufacturer.setName(rs.getString("producer_name"));
+        Phone phone = new Phone();
+        phone.setManufacturer(manufacturer);
+        phone.setPrice(rs.getDouble("cost"));
+        phone.setId(rs.getInt("mobile_id"));
+        phone.setName(rs.getString("name"));
+        return phone;
     }
 }

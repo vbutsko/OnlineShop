@@ -1,6 +1,6 @@
 package by.expertsoft.butko.web;
 
-import by.expertsoft.butko.dao.DAO;
+import by.expertsoft.butko.dao.GenericDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ import java.util.Map;
 @Scope("session")
 public class ProductListController {
     @Autowired
-    private DAO daoService;
+    private GenericDao daoService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String showMobilephonesList(Map<String, Object> model){
