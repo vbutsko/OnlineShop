@@ -20,7 +20,7 @@ public class ProductDetailsController {
     private GenericDao daoService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String getMobilephone(@RequestParam int id, Map<String, Object> model){
+    public String getMobilephone(@RequestParam(required = true) int id, Map<String, Object> model){
         Phone phone = (Phone)daoService.getById(id);
         model.put("productDetails", phone);
         return "productDetails";

@@ -30,7 +30,10 @@
                         </div>
                     </c:forEach>
                     <c:if test="${sessionScope.cart.getCartSize() > 0}">
-                        <input class="pull-right" type="submit" name="update" value="Update"/>
+                        <div class="pull-right">
+                            <input class="pull-right" type="submit" name="update" value="Update"/>
+                            <button formaction="/web/order" formmethod="get" type="submit">full order information</button>
+                        </div>
                     </c:if>
                 </fieldset>
             </sf:form>

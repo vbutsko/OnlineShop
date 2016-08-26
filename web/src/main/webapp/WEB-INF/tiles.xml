@@ -38,9 +38,9 @@
         <put-attribute name="body" value="/WEB-INF/views/pages/CartInfoController/cartPage.jsp"/>
     </definition>
     <!-- Order Page -->
-    <definition name="orderPage" extends="base.definition">
+    <definition name="orderInformationPage" extends="base.definition">
         <put-attribute name="title" value="Order Page"/>
-        <put-attribute name="body" value="/WEB-INF/views/pages/orderPage.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/OrderInformationPage/orderPage.jsp"/>
     </definition>
     <!-- Order Confirmation Page -->
     <definition name="orderConfirmationPage" extends="base.definition">

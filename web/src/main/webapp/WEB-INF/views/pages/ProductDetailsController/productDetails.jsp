@@ -53,7 +53,7 @@
                     <td>${productDetails.manufacturer.name}</td>
                 </tr>
                 <tr>
-                    <td>Cost   </td>
+                    <td>Price   </td>
                     <td>${productDetails.price}</td>
                 </tr>
             </table>
