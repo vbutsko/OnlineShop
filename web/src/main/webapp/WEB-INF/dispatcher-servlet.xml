@@ -58,4 +58,7 @@
     <!-- CartService for controllers -->
     <bean id="cartService" class="by.expertsoft.butko.service.CartService"/>
 
+    <!-- PersonalInfoService for controllers -->
+    <bean id="personalInfoService" class="by.expertsoft.butko.service.PersonalInfoService"/>
+
 </beans>

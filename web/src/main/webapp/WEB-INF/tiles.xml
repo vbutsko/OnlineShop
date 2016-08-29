@@ -40,12 +40,12 @@
     <!-- Order Page -->
     <definition name="orderInformationPage" extends="base.definition">
         <put-attribute name="title" value="Order Page"/>
-        <put-attribute name="body" value="/WEB-INF/views/pages/OrderInformationPage/orderPage.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/OrderInformationPage/orderInfoPage.jsp"/>
     </definition>
     <!-- Order Confirmation Page -->
     <definition name="orderConfirmationPage" extends="base.definition">
         <put-attribute name="title" value="Confirm Order"/>
-        <put-attribute name="body" value="/WEB-INF/views/pages/orderConfirmationPage.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/OrderConfirmationController/orderConfirmationPage.jsp"/>
     </definition>
 
 </tiles-definitions>
