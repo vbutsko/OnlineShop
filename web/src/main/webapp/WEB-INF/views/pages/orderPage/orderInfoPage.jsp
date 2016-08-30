@@ -18,7 +18,7 @@
             <th>Name</th>
             <th>Amount</th>
         </tr>
-        <c:forEach var="product" items="${sessionScope.cart.cartItemList}" varStatus="count">
+        <c:forEach var="product" items="${cartSession.cartItemList}" varStatus="count">
                 <tr>
                     <td><c:out value="${count.index + 1} : ${cartItemNames[count.index]}"/></td>
                     <td><c:out value="${product.amount}"/></td>
