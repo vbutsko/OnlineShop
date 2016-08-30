@@ -21,8 +21,7 @@ public class CartService {
     public final String cartName = getClass().getName().toString() + "_cart";
     @Autowired
     private PhoneDao daoService;
-    // addCartItem(request, productId, int quantity) ??
-    // updateItems(req, Map<productId, quantity) ??
+
     public void addCartItem(HttpServletRequest request, int productId, int amount){
         Cart cart = getCart(request);
         cart.addCartItem(productId, amount);
@@ -64,7 +63,7 @@ public class CartService {
         return result;
     }
 
-    public void updateCart(HttpServletRequest request, Map<Integer, Integer> cartMap){
+    public void updateCartItem(HttpServletRequest request, Map<Integer, Integer> cartMap){
         Cart cart = getCart(request);
         for(CartItem cartItem: cart.getCartItemList()){
             cartItem.setAmount(cartMap.get(cartItem.getProductId()));

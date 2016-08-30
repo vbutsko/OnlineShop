@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +35,6 @@ public class CartInfoController {
         Cart cart = new Cart();
         for(int i = 0; i < cartSession.getCartSize(); i++){
             cart.addCartItem(cartSession.getCartItemList().get(i).getProductId(), 0);
-            System.out.println(cart.getCartItemList().get(i).getProductId());
         }
         model.put("cart", cart);
         List cartItemNames = cartService.getCartItemNamesList(cartSession);
@@ -84,19 +82,11 @@ public class CartInfoController {
         if(resultCart.hasErrors()) {
             return "cartPage";
         }else{
-            /*Cart cartSession = cartService.getCart(request);
-            for (int i = cart.getCartSize() - 1; i >= 0; i--) {
-                cartSession.getCartItemById(i).setAmount(cart.getCartItemById(i).getAmount());
-            }
-            cartService.setCart(request, cartSession);*/
-            for(int i = 0; i < cartService.getCart(request).getCartSize(); i++){
-                System.out.println(cart.getCartItemList().get(i).getProductId());
-            }
             Map<Integer, Integer> cartMap = new HashMap<Integer, Integer>();
             for(CartItem cartItem: cart.getCartItemList()){
                 cartMap.put(cartItem.getProductId(), cartItem.getAmount());
             }
-            cartService.updateCart(request, cartMap);
+            cartService.updateCartItem(request, cartMap);
             return "redirect:/cart";
         }
     }
