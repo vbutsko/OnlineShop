@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,6 +33,8 @@ public class OrderController {
         PersonalInfo personalInfo = (PersonalInfo) orderService.getPersonalInfo(request);
         model.put("personalInfo", personalInfo);
         model.put("cartSession", cartService.getCart(request));
+        List cartItemNames = cartService.getCartItemNamesList(cartService.getCart(request));
+        model.put("cartItemNames", cartItemNames);
         return "orderInformationPage";
     }
 

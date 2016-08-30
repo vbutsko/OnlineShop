@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by wladek on 25.08.16.
@@ -48,5 +50,15 @@ public class CartService {
             totalCost = totalCost.add((daoService.getById(cartItem.getProductId())).getPrice().multiply(BigDecimal.valueOf(cartItem.getAmount())));
         }
         cart.setTotalCost(totalCost);
+    }
+    public String getCartItemName(int productId){
+        return daoService.getById(productId).getName();
+    }
+    public List getCartItemNamesList(Cart cart){
+        List result = new ArrayList(cart.getCartSize());
+        for(CartItem cartItem: cart.getCartItemList()){
+            result.add(getCartItemName(cartItem.getProductId()));
+        }
+        return result;
     }
 }

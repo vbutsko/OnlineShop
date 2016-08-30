@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,6 +27,9 @@ public class OrderConfirmationController {
     @RequestMapping(method = RequestMethod.GET)
     public String showConfirmationInformation(Map<String, Object> model, HttpServletRequest request){
         model.put("cartSession", cartService.getCart(request));
+        List cartItemNames = cartService.getCartItemNamesList(cartService.getCart(request));
+        model.put("cartItemNames", cartItemNames);
+        model.put("personalInfo", orderService.getPersonalInfo(request));
         return "orderConfirmationPage";
     }
 

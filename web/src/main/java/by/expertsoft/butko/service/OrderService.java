@@ -10,8 +10,7 @@ import java.math.BigDecimal;
  * Created by wladek on 28.08.16.
  */
 @Service
-// rename to orderservice
-public class PersonalInfoService {
+public class OrderService {
 
     public void setPersonalInfo(PersonalInfo personalInfo, HttpServletRequest request){
         request.getSession().setAttribute("personalInfo", personalInfo);

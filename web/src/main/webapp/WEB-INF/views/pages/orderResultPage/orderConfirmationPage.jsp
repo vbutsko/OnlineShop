@@ -20,14 +20,14 @@
         </tr>
         <c:forEach var="product" items="${sessionScope.cart.cartItemList}" varStatus="count">
             <tr>
-                <td><c:out value="${count.index + 1} : ${product.name}"/></td>
+                <td><c:out value="${count.index + 1} : ${cartItemNames[count.index]}"/></td>
                 <td><c:out value="${product.amount}"/></td>
             </tr>
         </c:forEach>
         <tr/><td/><td/>
         <tr>
             <th>Total Amount</th>
-            <td>${sessionScope.cart.getTotalAmount()}</td>
+            <td>${cartSession.getTotalAmount()}</td>
         </tr>
         <tr>
             <th>Delivery  Price</th>
@@ -36,21 +36,21 @@
         <tr>
             <th>Total Cost</th>
             <%
-                BigDecimal totalCost = ((PersonalInfo)pageContext.getSession().getAttribute("personalInfo")).getDeliveryPrice().add(((Cart)pageContext.getSession().getAttribute("cart")).getTotal());
-                out.println("<td>"+totalCost+"</td>");
+               // BigDecimal totalCost = ((PersonalInfo)pageContext.getSession().getAttribute("personalInfo")).getDeliveryPrice().add(((Cart)pageContext.getSession().getAttribute("cart")).getTotalCost());
+               // out.println("<td>"+totalCost+"</td>");
             %>
         </tr>
         <tr>
             <td>fist name</td>
-            <td>${sessionScope.personalInfo.firstName}</td>
+            <td>${personalInfo.firstName}</td>
         </tr>
         <tr>
             <td>last name</td>
-            <td>${sessionScope.personalInfo.lastName}</td>
+            <td>${personalInfo.lastName}</td>
         </tr>
         <tr>
             <td>number</td>
-            <td>${sessionScope.personalInfo.number}</td>
+            <td>${personalInfo.number}</td>
         </tr>
     </table>
     <button class="pull-right">finish</button>

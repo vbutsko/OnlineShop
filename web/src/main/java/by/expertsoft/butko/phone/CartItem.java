@@ -15,7 +15,7 @@ public class CartItem {
     @Min(value = 1, message = "amount must be integer >= 1")
     private int amount;
     private int productId;
-    private String name;
+    //private String name;
 
     public int getProductId() {
         return productId;
@@ -25,13 +25,13 @@ public class CartItem {
         this.productId = productId;
     }
 
-    public String getName() {
+    /*public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
+    }*/
     public int getAmount() {
         return amount;
     }

@@ -18,11 +18,11 @@
                         <div class="list-group-item">
                             <div class="row">
                                 <div class="col-lg-5 col-md-5">
-                                    <p >${count.index+1} : ${product.name}</p>
+                                    <p >${count.index+1} : ${cartItemNames[count.index]}</p>
                                 </div>
                                 <div class="col-lg-4 col-lg-offset-3 col-md-5 col-md-offset-2">
                                     <sf:input placeholder=" amount" path="cartItemList[${count.index}].amount" value="${product.amount}"/>
-                                    <button formaction="cart?cartItemId=${count.index}" type="submit" name="delete" onclick="return confirm('Are you sure you want to delete ${product.name} x${product.amount} from cart?')">delete</button>
+                                    <button formaction="cart?cartItemId=${count.index}" type="submit" name="delete" onclick="return confirm('Are you sure you want to delete ${cartItemNames[count.index]} x${product.amount} from cart?')">delete</button>
                                     <br/>
                                     <sf:errors path="cartItemList[${count.index}].amount" cssClass="error" cssStyle="color:red"/>
                                 </div>
@@ -38,7 +38,7 @@
                 </fieldset>
             </sf:form>
             <div class="row">
-                <c:out value="Total: ${cartSession.getTotalCost()}"/>
+                <c:out value="Total: ${cartSession.totalCost}"/>
             </div>
         </div>
     </body>

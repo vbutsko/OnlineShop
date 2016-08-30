@@ -20,14 +20,14 @@
         </tr>
         <c:forEach var="product" items="${sessionScope.cart.cartItemList}" varStatus="count">
                 <tr>
-                    <td><c:out value="${count.index + 1} : ${product.name}"/></td>
+                    <td><c:out value="${count.index + 1} : ${cartItemNames[count.index]}"/></td>
                     <td><c:out value="${product.amount}"/></td>
                 </tr>
         </c:forEach>
         <tr/><td/><td/>
         <tr>
             <th>Total Amount</th>
-            <td><c:out value="${sessionScope.cart.getTotalAmount()}"/></td>
+            <td><c:out value="${cartSession.getTotalAmount()}"/></td>
         </tr>
         <tr>
             <th>Delivery  Price</th>
@@ -36,8 +36,8 @@
         <tr>
             <th>Total Cost</th>
             <%
-                BigDecimal totalCost = ((PersonalInfo)request.getAttribute("personalInfo")).getDeliveryPrice().add(((Cart)pageContext.getSession().getAttribute("cart")).getTotal());
-                out.println("<td>"+totalCost+"</td>");
+               // BigDecimal totalCost = ((PersonalInfo)request.getAttribute("personalInfo")).getDeliveryPrice().add(((Cart)pageContext.getSession().getAttribute("cart")).getTotalCost());
+               // out.println("<td>"+totalCost+"</td>");
             %>
         </tr>
     </table>
@@ -48,15 +48,15 @@
         <table class="table table-striped table-bordered list-group-item">
             <tr>
                 <td><sf:label path="firstName">fist name</sf:label></td>
-                <td><sf:input path="firstName" value="${sessionScope.personalInfo.firstName}"/></td>
+                <td><sf:input path="firstName" value="${personalInfo.firstName}"/></td>
             </tr>
             <tr>
                 <td><sf:label path="lastName">last name</sf:label></td>
-                <td><sf:input path="lastName" value="${sessionScope.personalInfo.lastName}"/></td>
+                <td><sf:input path="lastName" value="${personalInfo.lastName}"/></td>
             </tr>
             <tr>
                 <td><sf:label path="number">number</sf:label></td>
-                <td><sf:input path="number" value="${sessionScope.personalInfo.number}"/></td>
+                <td><sf:input path="number" value="${personalInfo.number}"/></td>
             </tr>
         </table>
         <div class="pull-right">

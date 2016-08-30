@@ -7,11 +7,12 @@ import by.expertsoft.butko.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,14 +26,19 @@ public class CartInfoController {
     private CartService cartService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String getCartList(Map<String, Object> model, HttpServletRequest request){
+    public String getCartList(
+            Map<String, Object> model,
+            HttpServletRequest request
+    ){
         Cart cartSession = cartService.getCart(request);
+        model.put("cartSession", cartSession);
         Cart cart = new Cart();
         for(int i = 0; i < cartSession.getCartSize(); i++){
             cart.addCartItem(new CartItem());
         }
         model.put("cart", cart);
-        model.put("cartSession", cartSession);
+        List cartItemNames = cartService.getCartItemNamesList(cartSession);
+        model.put("cartItemNames", cartItemNames);
         return "cartPage";
     }
 
@@ -42,29 +48,37 @@ public class CartInfoController {
             BindingResult resultCartItem,
             HttpServletRequest request){
         JsonResponse jsonResponse = new JsonResponse();
+        Cart cart = cartService.getCart(request);
         if(!resultCartItem.hasErrors()){
             cartService.addCartItem(request,cartItem);
             jsonResponse.setStatus("SUCCESS");
-            jsonResponse.setResult(cartItem.getName() + " x" + cartItem.getAmount() +" now in your Cart.");
+            jsonResponse.setResult(cartService.getCartItemName(cartItem.getProductId()) +
+                                    " x" + cartItem.getAmount() +" now in your Cart.");
         }else{
             jsonResponse.setStatus("FAIL");
             jsonResponse.setResult("amount must be integer greater or equals than 1");
         }
-        jsonResponse.setStatusBar(cartService.getCart(request).getTotalAmount() + " :Amount; "
-                                + cartService.getCart(request).getTotalCost() + ": Total");
+        jsonResponse.setStatusBar(cart.getTotalAmount() + " :Amount; "
+                                + cart.getTotalCost() + ": Total");
         return jsonResponse;
         // return new HttpResult(message, HttpResult.HttStatus_BAD_REQUEST)
     }
 
     @RequestMapping(params = "delete", method = RequestMethod.POST)
-    public String delete(@RequestParam(required = true) Integer cartItemId, HttpServletRequest request){
+    public String delete(
+            @RequestParam(required = true) Integer cartItemId,
+            HttpServletRequest request
+    ){
         cartService.deleteCartItem(request, cartItemId);
         return "redirect:/cart";
     }
 
     @RequestMapping(params = "update", method = RequestMethod.POST)
-    public String update(@Valid@ModelAttribute("cart")Cart cart, BindingResult resultCart,
-                         HttpServletRequest request){
+    public String update(
+            @Valid@ModelAttribute("cart")Cart cart,
+            BindingResult resultCart,
+            HttpServletRequest request
+    ){
         if(resultCart.hasErrors()) {
             return "cartPage";
         }else{
@@ -76,4 +90,6 @@ public class CartInfoController {
             return "redirect:/cart";
         }
     }
+
+
 }
