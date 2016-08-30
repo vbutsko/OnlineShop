@@ -43,7 +43,6 @@
     </table>
     <br/>
     <p align="center" style="font-size: large">buyer information</p>
-
     <sf:form method="post" action="order" modelAttribute="personalInfo">
         <table class="table table-striped table-bordered list-group-item">
             <tr>
