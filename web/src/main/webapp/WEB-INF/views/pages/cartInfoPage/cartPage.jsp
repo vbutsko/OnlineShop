@@ -22,7 +22,7 @@
                                 </div>
                                 <div class="col-lg-4 col-lg-offset-3 col-md-5 col-md-offset-2">
                                     <sf:input placeholder=" amount" path="cartItemList[${count.index}].amount" value="${product.amount}"/>
-                                    <button formaction="cart?cartItemId=${count.index}" type="submit" name="delete" onclick="return confirm('Are you sure you want to delete ${cartItemNames[count.index]} x${product.amount} from cart?')">delete</button>
+                                    <button formaction="cart?cartItemProductId=${product.productId}" type="submit" name="delete" onclick="return confirm('Are you sure you want to delete ${cartItemNames[count.index]} x${product.amount} from cart?')">delete</button>
                                     <br/>
                                     <sf:errors path="cartItemList[${count.index}].amount" cssClass="error" cssStyle="color:red"/>
                                 </div>
@@ -34,12 +34,13 @@
                             <input class="pull-right" type="submit" name="update" value="Update"/>
                             <button formaction="/web/order" formmethod="get" type="submit">fill order information</button>
                         </div>
+                        <div class="row">
+                            <c:out value="Total: ${cartSession.totalCost}"/>
+                        </div>
                     </c:if>
                 </fieldset>
             </sf:form>
-            <div class="row">
-                <c:out value="Total: ${cartSession.totalCost}"/>
-            </div>
+
         </div>
     </body>
 </html>

@@ -25,8 +25,13 @@ public class Cart {
         cartItemList.add(cartItem);
     }
 
-    public void deleteCartItem(int cartItemId){
-        cartItemList.remove(cartItemId);
+    public void deleteCartItem(int cartItemProductId) {
+        for (int i = 0; i < cartItemList.size(); i++) {
+            if(cartItemList.get(i).getProductId() == cartItemProductId) {
+                cartItemList.remove(i);
+                return;
+            }
+        }
     }
 
     public int getCartSize(){

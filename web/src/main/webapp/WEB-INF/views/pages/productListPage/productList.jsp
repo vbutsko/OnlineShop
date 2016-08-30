@@ -49,7 +49,7 @@
                             <a href="<s:url value="/mobilephones/model?id=${product.id}"/>"> ${product.name} </a>
                         </div>
                         <div class="col-lg-4 col-lg-offset-3 col-md-5 col-md-offset-2 mobile_shop">
-                            <input name="amount" size="10" placeholder="amount" type="number" min="1">
+                            <input name="amount" value="1" size="10" placeholder="amount" type="number" min="1">
                             <button class="add_shop">add to cart</button>
                             <input type="hidden" name="productId" value="${product.id}">
                             <!-- remove -->

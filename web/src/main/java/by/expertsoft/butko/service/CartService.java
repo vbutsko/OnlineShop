@@ -38,9 +38,9 @@ public class CartService {
     public void setCart(HttpServletRequest request ,Cart cart){
         request.getSession().setAttribute(cartName, cart);
     }
-    public void deleteCartItem(HttpServletRequest request, int cartItemId){
+    public void deleteCartItem(HttpServletRequest request, int cartItemProductId){
         Cart cart = getCart(request);
-        cart.deleteCartItem(cartItemId);
+        cart.deleteCartItem(cartItemProductId);
         setTotalCost(cart);
         setCart(request, cart);
     }

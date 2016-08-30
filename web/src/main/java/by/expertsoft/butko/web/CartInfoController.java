@@ -66,10 +66,10 @@ public class CartInfoController {
 
     @RequestMapping(params = "delete", method = RequestMethod.POST)
     public String delete(
-            @RequestParam(required = true) Integer cartItemId,
+            @RequestParam(required = true) Integer cartItemProductId,
             HttpServletRequest request
     ){
-        cartService.deleteCartItem(request, cartItemId);
+        cartService.deleteCartItem(request, cartItemProductId);
         return "redirect:/cart";
     }
 
