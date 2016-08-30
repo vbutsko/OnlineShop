@@ -12,7 +12,16 @@ public class Cart {
     @Valid
     private List<CartItem> cartItemList;
 
-    public void addCartItem(CartItem cartItem){
+    public void addCartItem(int productId, int amount){
+        for(CartItem cartItem: cartItemList){
+            if(productId == cartItem.getProductId()){
+                cartItem.setAmount(cartItem.getAmount() + amount);
+                return;
+            }
+        }
+        CartItem cartItem = new CartItem();
+        cartItem.setAmount(amount);
+        cartItem.setProductId(productId);
         cartItemList.add(cartItem);
     }
 

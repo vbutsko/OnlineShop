@@ -21,9 +21,9 @@ public class CartService {
     private PhoneDao daoService;
     // addCartItem(request, productId, int quantity) ??
     // updateItems(req, Map<productId, quantity) ??
-    public void addCartItem(HttpServletRequest request, CartItem cartItem){
+    public void addCartItem(HttpServletRequest request, int productId, int amount){
         Cart cart = getCart(request);
-        cart.addCartItem(cartItem);
+        cart.addCartItem(productId, amount);
         setTotalCost(cart);
         setCart(request, cart);
     }

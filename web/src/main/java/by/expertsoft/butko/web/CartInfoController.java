@@ -34,7 +34,7 @@ public class CartInfoController {
         model.put("cartSession", cartSession);
         Cart cart = new Cart();
         for(int i = 0; i < cartSession.getCartSize(); i++){
-            cart.addCartItem(new CartItem());
+            cart.addCartItem(0,0);
         }
         model.put("cart", cart);
         List cartItemNames = cartService.getCartItemNamesList(cartSession);
@@ -50,7 +50,7 @@ public class CartInfoController {
         JsonResponse jsonResponse = new JsonResponse();
         Cart cart = cartService.getCart(request);
         if(!resultCartItem.hasErrors()){
-            cartService.addCartItem(request,cartItem);
+            cartService.addCartItem(request, cartItem.getProductId(), cartItem.getAmount());
             jsonResponse.setStatus("SUCCESS");
             jsonResponse.setResult(cartService.getCartItemName(cartItem.getProductId()) +
                                     " x" + cartItem.getAmount() +" now in your Cart.");
