@@ -21,6 +21,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/order")
+// rename to OrderController
 public class OrderInformationController {
     @Autowired
     private CartService cartService;
@@ -35,7 +36,7 @@ public class OrderInformationController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String fillPersonalInfo(@Valid @ModelAttribute("personalInfo")PersonalInfo personalInfo,
+    public String placeOrder(@Valid @ModelAttribute("personalInfo")PersonalInfo personalInfo,
                                    BindingResult resultPersonalInfo, HttpServletRequest request){
         if(resultPersonalInfo.hasErrors()) {
             return "orderInformationPage";

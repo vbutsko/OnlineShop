@@ -10,7 +10,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script type="text/javascript">
         $(function() {
             $(".add_shop").on('click', function () {
@@ -40,24 +40,23 @@
             });
         });
     </script>
-        <div class="container-fluid">
+<div class="container-fluid">
             <c:forEach var="product" items="${productList}" varStatus="count">
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-lg-5 col-md-5">
                             <c:out value="${count.index+1}  " />
-                            <a href="<s:url value="/mobilephones/model?id=${product.getId()}"/>"> ${product.getName()} </a>
+                            <a href="<s:url value="/mobilephones/model?id=${product.id}"/>"> ${product.name} </a>
                         </div>
                         <div class="col-lg-4 col-lg-offset-3 col-md-5 col-md-offset-2 mobile_shop">
                             <input name="amount" size="10" placeholder="amount" type="number" min="1">
-                            <sf:errors path="amount" cssClass="error" />
                             <button class="add_shop">add to cart</button>
-                            <input type="hidden" name="productId" value="${product.getId()}">
-                            <input type="hidden" name="name" value="${product.getName()}">
+                            <input type="hidden" name="productId" value="${product.id}">
+                            <!-- remove -->
+                            <input type="hidden" name="name" value="${product.name}">
                             <div name="info"></div>
                         </div>
                     </div>
                 </div>
             </c:forEach>
-
         </div>
