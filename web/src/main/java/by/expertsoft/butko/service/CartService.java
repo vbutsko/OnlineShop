@@ -1,46 +1,52 @@
 package by.expertsoft.butko.service;
 
-import by.expertsoft.butko.dao.GenericDao;
+import by.expertsoft.butko.dao.phone.PhoneDao;
 import by.expertsoft.butko.phone.Cart;
 import by.expertsoft.butko.phone.CartItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 
 /**
  * Created by wladek on 25.08.16.
  */
 @Service
 public class CartService {
-
-    private GenericDao daoService;
-
+    public final String cartName = getClass().getName().toString() + "_cart";
     @Autowired
-    public void setDaoService(GenericDao daoService){
-        this.daoService = daoService;
-    }
-
+    private PhoneDao daoService;
+    // addCartItem(request, productId, int quantity) ??
+    // updateItems(req, Map<productId, quantity) ??
     public void addCartItem(HttpServletRequest request, CartItem cartItem){
         Cart cart = getCart(request);
         cart.addCartItem(cartItem);
+        setTotalCost(cart);
         setCart(request, cart);
     }
     public Cart getCart(HttpServletRequest request){
-        Cart cart = (Cart)request.getSession().getAttribute("cart");
+        Cart cart = (Cart)request.getSession().getAttribute(cartName);
         if(cart == null){
             cart = new Cart();
-            cart.setDaoService(daoService);
             setCart(request, cart);
         }
         return cart;
     }
     public void setCart(HttpServletRequest request ,Cart cart){
-        request.getSession().setAttribute("cart", cart);
+        request.getSession().setAttribute(cartName, cart);
     }
     public void deleteCartItem(HttpServletRequest request, int cartItemId){
         Cart cart = getCart(request);
         cart.deleteCartItem(cartItemId);
+        setTotalCost(cart);
         setCart(request, cart);
+    }
+    private void setTotalCost(Cart cart){
+        BigDecimal totalCost = new BigDecimal(0);
+        for(CartItem cartItem: cart.getCartItemList()){
+            totalCost = totalCost.add((daoService.getById(cartItem.getProductId())).getPrice().multiply(BigDecimal.valueOf(cartItem.getAmount())));
+        }
+        cart.setTotalCost(totalCost);
     }
 }

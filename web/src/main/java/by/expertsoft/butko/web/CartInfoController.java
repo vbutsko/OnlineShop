@@ -26,7 +26,7 @@ public class CartInfoController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String getCartList(Map<String, Object> model, HttpServletRequest request){
-        Cart cartSession = cartService.getCart(request); //(Cart) request.getSession().getAttribute("cart");
+        Cart cartSession = cartService.getCart(request);
         Cart cart = new Cart();
         for(int i = 0; i < cartSession.getCartSize(); i++){
             cart.addCartItem(new CartItem());
@@ -51,7 +51,7 @@ public class CartInfoController {
             jsonResponse.setResult("amount must be integer greater or equals than 1");
         }
         jsonResponse.setStatusBar(cartService.getCart(request).getTotalAmount() + " :Amount; "
-                                + cartService.getCart(request).getTotal() + ": Total");
+                                + cartService.getCart(request).getTotalCost() + ": Total");
         return jsonResponse;
         // return new HttpResult(message, HttpResult.HttStatus_BAD_REQUEST)
     }

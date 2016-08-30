@@ -17,35 +17,35 @@
     <!--  HomePage -->
     <definition name="homePage" extends="base.definition">
         <put-attribute name="title" value="Welcome" />
-        <put-attribute name="body" value="/WEB-INF/views/pages/HomePageController/home.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/homePage/home.jsp" />
     </definition>
 
     <!-- Product List -->
     <definition name="productList" extends="base.definition">
         <put-attribute name="title" value="List of Mobilephones"/>
-        <put-attribute name="body" value="/WEB-INF/views/pages/ProductListController/productList.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/productListPage/productList.jsp" />
     </definition>
 
     <!-- Product Details -->
     <definition name="productDetails" extends="base.definition">
         <put-attribute name="title" value="delails"/>
-        <put-attribute name="body" value="/WEB-INF/views/pages/ProductDetailsController/productDetails.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/productDetailsPage/productDetails.jsp"/>
     </definition>
 
     <!-- Cart Page -->
     <definition name="cartPage" extends="base.definition">
         <put-attribute name="title" value="Cart Page"/>
-        <put-attribute name="body" value="/WEB-INF/views/pages/CartInfoController/cartPage.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/cartInfoPage/cartPage.jsp"/>
     </definition>
     <!-- Order Page -->
     <definition name="orderInformationPage" extends="base.definition">
         <put-attribute name="title" value="Order Page"/>
-        <put-attribute name="body" value="/WEB-INF/views/pages/OrderInformationPage/orderInfoPage.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/orderPage/orderInfoPage.jsp"/>
     </definition>
     <!-- Order Confirmation Page -->
     <definition name="orderConfirmationPage" extends="base.definition">
         <put-attribute name="title" value="Confirm Order"/>
-        <put-attribute name="body" value="/WEB-INF/views/pages/OrderConfirmationController/orderConfirmationPage.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/orderResultPage/orderConfirmationPage.jsp"/>
     </definition>
 
 </tiles-definitions>

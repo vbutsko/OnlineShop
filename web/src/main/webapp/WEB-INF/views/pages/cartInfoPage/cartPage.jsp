@@ -38,7 +38,7 @@
                 </fieldset>
             </sf:form>
             <div class="row">
-                <c:out value="Total: ${cartSession.getTotal()}"/>
+                <c:out value="Total: ${cartSession.getTotalCost()}"/>
             </div>
         </div>
     </body>
