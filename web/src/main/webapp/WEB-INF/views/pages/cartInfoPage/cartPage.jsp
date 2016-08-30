@@ -22,6 +22,7 @@
                                 </div>
                                 <div class="col-lg-4 col-lg-offset-3 col-md-5 col-md-offset-2">
                                     <sf:input placeholder=" amount" path="cartItemList[${count.index}].amount" value="${product.amount}"/>
+                                    <sf:input type="hidden" path="cartItemList[${count.index}].productId" value="${product.productId}"/>
                                     <button formaction="cart?cartItemProductId=${product.productId}" type="submit" name="delete" onclick="return confirm('Are you sure you want to delete ${cartItemNames[count.index]} x${product.amount} from cart?')">delete</button>
                                     <br/>
                                     <sf:errors path="cartItemList[${count.index}].amount" cssClass="error" cssStyle="color:red"/>

@@ -4,12 +4,14 @@ import by.expertsoft.butko.dao.phone.PhoneDao;
 import by.expertsoft.butko.phone.Cart;
 import by.expertsoft.butko.phone.CartItem;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.binding.format.IntegerNumberFormatFactory;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wladek on 25.08.16.
@@ -60,5 +62,13 @@ public class CartService {
             result.add(getCartItemName(cartItem.getProductId()));
         }
         return result;
+    }
+
+    public void updateCart(HttpServletRequest request, Map<Integer, Integer> cartMap){
+        Cart cart = getCart(request);
+        for(CartItem cartItem: cart.getCartItemList()){
+            cartItem.setAmount(cartMap.get(cartItem.getProductId()));
+        }
+        setCart(request, cart);
     }
 }
