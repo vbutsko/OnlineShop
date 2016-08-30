@@ -3,7 +3,7 @@ package by.expertsoft.butko.web;
 
 import by.expertsoft.butko.phone.PersonalInfo;
 import by.expertsoft.butko.service.CartService;
-import by.expertsoft.butko.service.PersonalInfoService;
+import by.expertsoft.butko.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.math.BigDecimal;
 import java.util.Map;
 
 /**
@@ -22,16 +21,17 @@ import java.util.Map;
 @Controller
 @RequestMapping("/order")
 // rename to OrderController
-public class OrderInformationController {
+public class OrderController {
     @Autowired
     private CartService cartService;
     @Autowired
-    private PersonalInfoService personalInfoService;
+    private OrderService orderService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String getCartList(Map<String, Object> model, HttpServletRequest request){
-        PersonalInfo personalInfo = (PersonalInfo) personalInfoService.getPersonalInfo(request);
+        PersonalInfo personalInfo = (PersonalInfo) orderService.getPersonalInfo(request);
         model.put("personalInfo", personalInfo);
+        model.put("cartSession", cartService.getCart(request));
         return "orderInformationPage";
     }
 
@@ -41,7 +41,7 @@ public class OrderInformationController {
         if(resultPersonalInfo.hasErrors()) {
             return "orderInformationPage";
         }else{
-            personalInfoService.setPersonalInfo(personalInfo, request);
+            orderService.setPersonalInfo(personalInfo, request);
             return "redirect:/order/confirmation";
         }
     }

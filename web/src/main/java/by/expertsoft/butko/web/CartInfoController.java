@@ -32,12 +32,15 @@ public class CartInfoController {
             cart.addCartItem(new CartItem());
         }
         model.put("cart", cart);
+        model.put("cartSession", cartSession);
         return "cartPage";
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public @ResponseBody JsonResponse addProductsToCart(@Valid @ModelAttribute(value="cartItem")CartItem cartItem, BindingResult resultCartItem,
-                                   HttpServletRequest request){
+    public @ResponseBody JsonResponse addProductsToCart(
+            @Valid @ModelAttribute(value="cartItem")CartItem cartItem,
+            BindingResult resultCartItem,
+            HttpServletRequest request){
         JsonResponse jsonResponse = new JsonResponse();
         if(!resultCartItem.hasErrors()){
             cartService.addCartItem(request,cartItem);
@@ -50,6 +53,7 @@ public class CartInfoController {
         jsonResponse.setStatusBar(cartService.getCart(request).getTotalAmount() + " :Amount; "
                                 + cartService.getCart(request).getTotal() + ": Total");
         return jsonResponse;
+        // return new HttpResult(message, HttpResult.HttStatus_BAD_REQUEST)
     }
 
     @RequestMapping(params = "delete", method = RequestMethod.POST)
