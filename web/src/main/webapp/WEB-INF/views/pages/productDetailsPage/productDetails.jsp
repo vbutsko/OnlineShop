@@ -9,36 +9,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script type="text/javascript">
-    $(function() {
-        $(".add_shop").on('click', function () {
-            var phone = $(this).parent('.mobile_shop');
-
-            var amount = phone.find("[name=amount]").val();
-            var productId = phone.find("[name=productId]").val();
-            var name = phone.find("[name=name]").val();
-
-            $.ajax({
-                type: "POST",
-                url: "/web/cart",
-                data: "amount=" + amount + "&productId=" + productId + "&name=" + name,
-                success: function (response) {
-                    // we have the response
-                    var message = response.result;
-                    if(response.status == "SUCCESS")
-                        message = "<p style=\"color:green\">" + message + "</p>";
-                    else
-                        message = "<p style=\"color:red\">" + message + "</p>";
-                    phone.find("[name=info]").html(message);
-                    $('#headerTotal').html(response.statusBar);
-                },
-                error: function (e) {
-                    alert('Error: ' + e);
-                }
-            });
-        });
-    });
-</script>
 <div class="container-fluid">
     <table class="table table-striped table-bordered">
         <caption align="center">Characteristics</caption>
@@ -61,8 +31,8 @@
             <sf:errors path="amount" cssClass="error" />
             <button class="add_shop">add to cart</button>
             <input type="hidden" name="productId" value="${productDetails.id}">
-            <input type="hidden" name="name" value="${productDetails.name}">
             <div name="info"></div>
         <!--</sf:form>-->
     </div>
 </div>
+<script src="<c:url value="/resources/js/addToCartScript.js"/>"></script>
