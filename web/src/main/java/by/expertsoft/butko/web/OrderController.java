@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -22,17 +23,20 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/order")
-// rename to OrderController
+@SessionAttributes("personalInfo")
 public class OrderController {
     @Autowired
     private CartService cartService;
     @Autowired
     private OrderService orderService;
 
+    @ModelAttribute
+    public PersonalInfo populatePersonalInfo(){
+        return new PersonalInfo();
+    }
+
     @RequestMapping(method = RequestMethod.GET)
-    public String getCartList(Map<String, Object> model, HttpServletRequest request){
-        PersonalInfo personalInfo = (PersonalInfo) orderService.getPersonalInfo(request);
-        model.put("personalInfo", personalInfo);
+    public String getCartList(Map<String, Object> model){
         model.put("cartSession", cartService.getCart());
         List cartItemNames = cartService.getCartItemNamesList(cartService.getCart());
         model.put("cartItemNames", cartItemNames);
