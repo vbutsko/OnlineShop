@@ -9,7 +9,6 @@ public class PersonalInfo {
     private String firstName;
     private String lastName;
     private String number;
-    private BigDecimal deliveryPrice = new BigDecimal(5);
     public String getFirstName() {
         return firstName;
     }
@@ -32,13 +31,5 @@ public class PersonalInfo {
 
     public void setNumber(String number) {
         this.number = number;
-    }
-
-    public BigDecimal getDeliveryPrice() {
-        return deliveryPrice;
-    }
-
-    public void setDeliveryPrice(BigDecimal deliveryPrice) {
-        this.deliveryPrice = deliveryPrice;
     }
 }

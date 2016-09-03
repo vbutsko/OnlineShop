@@ -53,7 +53,7 @@ public class OrderController {
             return "orderInformationPage";
         }else{
             // put thank you message into flash attributes
-            orderService.setPersonalInfo(personalInfo, request);
+            //orderService.setPersonalInfo(personalInfo, request);
             return "redirect:/order/confirmation";
         }
     }

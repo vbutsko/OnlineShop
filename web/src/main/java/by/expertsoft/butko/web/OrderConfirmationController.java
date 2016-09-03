@@ -26,11 +26,10 @@ public class OrderConfirmationController {
 
     // map .../confirmation/<orderid>
     @RequestMapping(method = RequestMethod.GET)
-    public String showConfirmationInformation(Map<String, Object> model, HttpServletRequest request){
+    public String showConfirmationInformation(Map<String, Object> model){
         model.put("cartSession", cartService.getCart());
         List cartItemNames = cartService.getCartItemNamesList(cartService.getCart());
         model.put("cartItemNames", cartItemNames);
-        model.put("personalInfo", orderService.getPersonalInfo(request));
         return "orderConfirmationPage";
     }
 
