@@ -25,10 +25,10 @@ public class ProductListController {
     private CartService cartService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String showMobilephonesList(Map<String, Object> model, HttpServletRequest request){
+    public String showMobilephonesList(Map<String, Object> model){
         List productList = daoService.getList();
         model.put("productList", productList);
-        model.put("cartSession", cartService.getCart(request));
+        model.put("cartSession", cartService.getCart());
         return "productList";
     }
 }

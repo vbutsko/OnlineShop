@@ -4,7 +4,7 @@ import by.expertsoft.butko.dao.phone.PhoneDao;
 import by.expertsoft.butko.phone.Cart;
 import by.expertsoft.butko.phone.CartItem;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.binding.format.IntegerNumberFormatFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,35 +15,40 @@ import java.util.Map;
 
 /**
  * Created by wladek on 25.08.16.
+ * move to core?
  */
 @Service
+@Scope("session")
+// TODO: session scope, remove request dependency
 public class CartService {
+    private Cart cart;
+
     public final String cartName = getClass().getName().toString() + "_cart";
+    // add cart fields
     @Autowired
     private PhoneDao daoService;
 
-    public void addCartItem(HttpServletRequest request, int productId, int amount){
-        Cart cart = getCart(request);
+    public void addCartItem(int productId, int amount){
+        Cart cart = getCart();
         cart.addCartItem(productId, amount);
         setTotalCost(cart);
-        setCart(request, cart);
+        setCart(cart);
     }
-    public Cart getCart(HttpServletRequest request){
-        Cart cart = (Cart)request.getSession().getAttribute(cartName);
+    public Cart getCart(){
         if(cart == null){
             cart = new Cart();
-            setCart(request, cart);
+            setCart(cart);
         }
         return cart;
     }
-    public void setCart(HttpServletRequest request ,Cart cart){
-        request.getSession().setAttribute(cartName, cart);
+    public void setCart(Cart cart){
+        this.cart = cart;
     }
-    public void deleteCartItem(HttpServletRequest request, int cartItemProductId){
-        Cart cart = getCart(request);
+    public void deleteCartItem(int cartItemProductId){
+        Cart cart = getCart();
         cart.deleteCartItem(cartItemProductId);
         setTotalCost(cart);
-        setCart(request, cart);
+        setCart(cart);
     }
     private void setTotalCost(Cart cart){
         BigDecimal totalCost = new BigDecimal(0);
@@ -63,11 +68,12 @@ public class CartService {
         return result;
     }
 
-    public void updateCartItem(HttpServletRequest request, Map<Integer, Integer> cartMap){
-        Cart cart = getCart(request);
+    public void updateCartItem(Map<Integer, Integer> cartMap){
+        Cart cart = getCart();
         for(CartItem cartItem: cart.getCartItemList()){
             cartItem.setAmount(cartMap.get(cartItem.getProductId()));
         }
-        setCart(request, cart);
+        setTotalCost(cart);
+        setCart(cart);
     }
 }

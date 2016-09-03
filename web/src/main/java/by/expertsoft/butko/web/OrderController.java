@@ -18,6 +18,7 @@ import java.util.Map;
 
 /**
  * Created by wladek on 26.08.16.
+ * session Attribute
  */
 @Controller
 @RequestMapping("/order")
@@ -32,18 +33,22 @@ public class OrderController {
     public String getCartList(Map<String, Object> model, HttpServletRequest request){
         PersonalInfo personalInfo = (PersonalInfo) orderService.getPersonalInfo(request);
         model.put("personalInfo", personalInfo);
-        model.put("cartSession", cartService.getCart(request));
-        List cartItemNames = cartService.getCartItemNamesList(cartService.getCart(request));
+        model.put("cartSession", cartService.getCart());
+        List cartItemNames = cartService.getCartItemNamesList(cartService.getCart());
         model.put("cartItemNames", cartItemNames);
         return "orderInformationPage";
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String placeOrder(@Valid @ModelAttribute("personalInfo")PersonalInfo personalInfo,
-                                   BindingResult resultPersonalInfo, HttpServletRequest request){
+    public String placeOrder(
+            @Valid @ModelAttribute("personalInfo")PersonalInfo personalInfo,
+            BindingResult resultPersonalInfo,
+            HttpServletRequest request
+    ){
         if(resultPersonalInfo.hasErrors()) {
             return "orderInformationPage";
         }else{
+            // put thank you message into flash attributes
             orderService.setPersonalInfo(personalInfo, request);
             return "redirect:/order/confirmation";
         }

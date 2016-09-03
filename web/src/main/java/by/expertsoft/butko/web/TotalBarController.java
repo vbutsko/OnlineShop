@@ -22,8 +22,8 @@ public class TotalBarController {
 
     @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody
-    String getTotalBar(HttpServletRequest request){
-        Cart cart = cartService.getCart(request);
+    String getTotalBar(){
+        Cart cart = cartService.getCart();
         return cart.getTotalAmount() + " :Amount; "
                 + cart.getTotalCost() + ": Total";
     }

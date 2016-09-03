@@ -20,7 +20,6 @@ public class HomePageController {
 
     @RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
     public String showHomePage(HttpServletRequest request, Map<String, Object> model){
-        model.put("cartSession", cartService.getCart(request));
         return "homePage";
     }
 }

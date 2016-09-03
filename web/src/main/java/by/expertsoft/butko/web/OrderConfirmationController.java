@@ -24,10 +24,11 @@ public class OrderConfirmationController {
     @Autowired
     private CartService cartService;
 
+    // map .../confirmation/<orderid>
     @RequestMapping(method = RequestMethod.GET)
     public String showConfirmationInformation(Map<String, Object> model, HttpServletRequest request){
-        model.put("cartSession", cartService.getCart(request));
-        List cartItemNames = cartService.getCartItemNamesList(cartService.getCart(request));
+        model.put("cartSession", cartService.getCart());
+        List cartItemNames = cartService.getCartItemNamesList(cartService.getCart());
         model.put("cartItemNames", cartItemNames);
         model.put("personalInfo", orderService.getPersonalInfo(request));
         return "orderConfirmationPage";

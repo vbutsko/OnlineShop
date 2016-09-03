@@ -35,10 +35,7 @@
         </tr>
         <tr>
             <th>Total Cost</th>
-            <%
-               // BigDecimal totalCost = ((PersonalInfo)pageContext.getSession().getAttribute("personalInfo")).getDeliveryPrice().add(((Cart)pageContext.getSession().getAttribute("cart")).getTotalCost());
-               // out.println("<td>"+totalCost+"</td>");
-            %>
+            <td>${cartSession.totalCost}</td>
         </tr>
         <tr>
             <td>fist name</td>
@@ -53,5 +50,4 @@
             <td>${personalInfo.number}</td>
         </tr>
     </table>
-    <button class="pull-right">finish</button>
 </div>

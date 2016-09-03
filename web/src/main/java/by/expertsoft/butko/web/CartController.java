@@ -20,7 +20,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/cart")
-public class CartInfoController {
+public class CartController {
 
     @Autowired
     private CartService cartService;
@@ -30,7 +30,7 @@ public class CartInfoController {
             Map<String, Object> model,
             HttpServletRequest request
     ){
-        Cart cartSession = cartService.getCart(request);
+        Cart cartSession = cartService.getCart();
         model.put("cartSession", cartSession);
         Cart cart = new Cart();
         for(int i = 0; i < cartSession.getCartSize(); i++){
@@ -48,9 +48,9 @@ public class CartInfoController {
             BindingResult resultCartItem,
             HttpServletRequest request){
         JsonResponse jsonResponse = new JsonResponse();
-        Cart cart = cartService.getCart(request);
+        Cart cart = cartService.getCart();
         if(!resultCartItem.hasErrors()){
-            cartService.addCartItem(request, cartItem.getProductId(), cartItem.getAmount());
+            cartService.addCartItem(cartItem.getProductId(), cartItem.getAmount());
             jsonResponse.setStatus("SUCCESS");
             jsonResponse.setResult(cartService.getCartItemName(cartItem.getProductId()) +
                                     " x" + cartItem.getAmount() +" now in your Cart.");
@@ -69,7 +69,7 @@ public class CartInfoController {
             @RequestParam(required = true) Integer cartItemProductId,
             HttpServletRequest request
     ){
-        cartService.deleteCartItem(request, cartItemProductId);
+        cartService.deleteCartItem(cartItemProductId);
         return "redirect:/cart";
     }
 
@@ -86,7 +86,7 @@ public class CartInfoController {
             for(CartItem cartItem: cart.getCartItemList()){
                 cartMap.put(cartItem.getProductId(), cartItem.getAmount());
             }
-            cartService.updateCartItem(request, cartMap);
+            cartService.updateCartItem(cartMap);
             return "redirect:/cart";
         }
     }

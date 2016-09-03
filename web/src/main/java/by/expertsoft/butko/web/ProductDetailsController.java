@@ -31,7 +31,7 @@ public class ProductDetailsController {
     ){
         Phone phone = (Phone)daoService.getById(id);
         model.put("productDetails", phone);
-        model.put("cartSession", cartService.getCart(request));
+        model.put("cartSession", cartService.getCart());
         return "productDetails";
     }
 }
