@@ -2,11 +2,6 @@
  * Created by wladek on 01.09.16.
  */
 (function() {
-    var app = {};
-    app.updateStatusBar = function(response){
-        $('#headerTotal').html(response);
-        //console.log('gfgghj')
-    }
     $(".add_shop").on('click', function () {
         var phone = $(this).parent('.mobile_shop');
 
@@ -22,7 +17,7 @@
                 var message = response.result;
                 if (response.status == "SUCCESS") {
                     message = "<p style=\"color:green\">" + message + "</p>";
-                    app.updateStatusBar(response.statusBar);
+                    updateTotalBar();
                 }
                 else
                     message = "<p style=\"color:red\">" + message + "</p>";
@@ -35,3 +30,17 @@
         });
     });
 })();
+
+window.onload = updateTotalBar;
+function updateTotalBar() {
+    $.ajax({
+        type: "POST",
+        url: "/web/total/update",
+        success: function (response) {
+            $('#headerTotal').html(response);
+        },
+        error: function (e) {
+            alert('Error: ' + e);
+        }
+    });
+}

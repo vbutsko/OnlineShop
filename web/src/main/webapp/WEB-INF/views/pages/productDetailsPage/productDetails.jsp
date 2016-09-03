@@ -8,7 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <div class="container-fluid">
     <table class="table table-striped table-bordered">
         <caption align="center">Characteristics</caption>
@@ -35,4 +34,3 @@
         <!--</sf:form>-->
     </div>
 </div>
-<script src="<c:url value="/resources/js/addToCartScript.js"/>"></script>
