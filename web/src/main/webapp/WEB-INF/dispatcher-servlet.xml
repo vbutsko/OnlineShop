@@ -52,13 +52,13 @@
 
     <!-- JdbcPhoneDao for controllers -->
     <bean id="daoService" class="by.expertsoft.butko.dao.phone.JdbcPhoneDao">
-        <property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate" />
+        <!--<property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate" />-->
     </bean>
 
     <!-- CartService for controllers -->
     <bean id="cartService" class="by.expertsoft.butko.service.CartService"/>
 
     <!-- PersonalInfoService for controllers -->
-    <bean id="personalInfoService" class="by.expertsoft.butko.service.OrderService"/>
+    <bean id="orderService" class="by.expertsoft.butko.service.OrderService"/>
 
 </beans>

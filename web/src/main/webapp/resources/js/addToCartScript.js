@@ -2,7 +2,7 @@
  * Created by wladek on 01.09.16.
  */
 (function() {
-    $(".add_shop").on('click', function () {
+    var clickHandler = function () {
         var phone = $(this).parent('.mobile_shop');
 
         var amount = phone.find("[name=amount]").val();
@@ -28,7 +28,9 @@
                 alert('Error: ' + e);
             }
         });
-    });
+    };
+
+    $(".add_shop").on('click', clickHandler);
 })();
 
 window.onload = updateTotalBar;

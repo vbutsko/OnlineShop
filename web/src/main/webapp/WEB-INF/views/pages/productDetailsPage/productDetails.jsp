@@ -25,7 +25,7 @@
         </tr>
     </table>
     <div class="pull-right mobile_shop">
-        <!--<sf:form class="mobile_shop" method="post" modelAttribute="cartItem">-->
+        <!--<sf:form class="mobile_shop" method="post" modelAttribute="cartItemForm">-->
             <input name="amount" value="1" size="10" placeholder="amount" type="number" min="1">
             <sf:errors path="amount" cssClass="error" />
             <button class="add_shop">add to cart</button>
