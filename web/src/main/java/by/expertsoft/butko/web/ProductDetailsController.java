@@ -19,7 +19,7 @@ import java.util.Map;
 @RequestMapping("/mobilephones/model")
 public class ProductDetailsController {
     @Autowired
-    private GenericDao daoService;
+    private GenericDao jdbcPhoneDao;
     @Autowired
     private CartService cartService;
 
@@ -29,7 +29,7 @@ public class ProductDetailsController {
             Map<String, Object> model,
             HttpServletRequest request
     ){
-        Phone phone = (Phone)daoService.getById(id);
+        Phone phone = (Phone)jdbcPhoneDao.getById(id);
         model.put("productDetails", phone);
         model.put("cartSession", cartService.getCart());
         return "productDetails";

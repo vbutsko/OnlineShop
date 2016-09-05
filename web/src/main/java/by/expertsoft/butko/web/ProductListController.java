@@ -20,13 +20,13 @@ import java.util.Map;
 @RequestMapping("/mobilephones")
 public class ProductListController {
     @Autowired
-    private GenericDao daoService;
+    private GenericDao jdbcPhoneDao;
     @Autowired
     private CartService cartService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String showMobilephonesList(Map<String, Object> model){
-        List productList = daoService.getList();
+        List productList = jdbcPhoneDao.getList();
         model.put("productList", productList);
         model.put("cartSession", cartService.getCart());
         return "productList";

@@ -51,6 +51,7 @@ public class OrderController {
         if(resultPersonalInfo.hasErrors()) {
             return "orderInformationPage";
         }else{
+            orderService.placeOrder(cartService.getCart(), personalInfo);
             // put thank you message into flash attributes
             return "redirect:/order/confirmation";
         }
