@@ -29,4 +29,8 @@ public class Order extends AbstractCart {
     public void setDelivered(boolean delivered) {
         isDelivered = delivered;
     }
+
+    public Order(){
+        personalInfo = new PersonalInfo();
+    }
 }

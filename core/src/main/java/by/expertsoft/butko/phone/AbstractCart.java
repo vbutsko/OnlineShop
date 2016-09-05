@@ -1,6 +1,7 @@
 package by.expertsoft.butko.phone;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
  */
 public abstract class AbstractCart {
     protected BigDecimal totalCost = new BigDecimal(0);
-    protected List<AbstractCartItem> cartItemList;
+    protected List<AbstractCartItem> cartItemList = new ArrayList<>();
     public int getCartSize(){
         return cartItemList.size();
     }
