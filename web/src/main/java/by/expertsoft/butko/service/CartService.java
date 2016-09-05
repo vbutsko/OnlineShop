@@ -1,6 +1,7 @@
 package by.expertsoft.butko.service;
 
 import by.expertsoft.butko.dao.phone.PhoneDao;
+import by.expertsoft.butko.phone.AbstractCartItem;
 import by.expertsoft.butko.phone.Cart;
 import by.expertsoft.butko.phone.CartItem;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,6 @@ import java.util.Map;
 public class CartService {
     private Cart cart;
 
-    public final String cartName = getClass().getName().toString() + "_cart";
-    // add cart fields
     @Autowired
     private PhoneDao daoService;
 
@@ -52,7 +51,7 @@ public class CartService {
     }
     private void setTotalCost(Cart cart){
         BigDecimal totalCost = new BigDecimal(0);
-        for(CartItem cartItem: cart.getCartItemList()){
+        for(AbstractCartItem cartItem: cart.getCartItemList()){
             totalCost = totalCost.add((daoService.getById(cartItem.getProductId())).getPrice().multiply(BigDecimal.valueOf(cartItem.getAmount())));
         }
         cart.setTotalCost(totalCost);
@@ -62,7 +61,7 @@ public class CartService {
     }
     public List getCartItemNamesList(Cart cart){
         List result = new ArrayList(cart.getCartSize());
-        for(CartItem cartItem: cart.getCartItemList()){
+        for(AbstractCartItem cartItem: cart.getCartItemList()){
             result.add(getCartItemName(cartItem.getProductId()));
         }
         return result;
@@ -70,8 +69,8 @@ public class CartService {
 
     public void updateCartItem(Map<Integer, Integer> cartMap){
         Cart cart = getCart();
-        for(CartItem cartItem: cart.getCartItemList()){
-            cartItem.setAmount(cartMap.get(cartItem.getProductId()));
+        for(AbstractCartItem cartItem: cart.getCartItemList()){
+            ((CartItem)cartItem).setAmount(cartMap.get(cartItem.getProductId()));
         }
         setTotalCost(cart);
         setCart(cart);

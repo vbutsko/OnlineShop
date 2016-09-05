@@ -1,8 +1,6 @@
 package by.expertsoft.butko.web;
 
-import by.expertsoft.butko.phone.Cart;
-import by.expertsoft.butko.phone.CartItem;
-import by.expertsoft.butko.phone.JsonResponse;
+import by.expertsoft.butko.phone.*;
 import by.expertsoft.butko.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,23 +19,33 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/cart")
+@SessionAttributes("cartForm")
 public class CartController {
 
     @Autowired
     private CartService cartService;
 
+    @ModelAttribute
+    public CartForm populateCartForm(){
+        CartForm cartForm = new CartForm();
+        List<CartItemForm> list = new ArrayList<CartItemForm>();
+        Cart cartSession = cartService.getCart();
+        for(int i = 0; i < cartSession.getCartSize(); i++){
+            CartItemForm cartItemForm = new CartItemForm();
+            cartItemForm.setProductId(cartSession.getCartItemList().get(i).getProductId());
+            list.add(cartItemForm);
+        }
+        cartForm.setCartItemFormList(list);
+        return cartForm;
+    }
+
+
     @RequestMapping(method = RequestMethod.GET)
     public String getCartList(
-            Map<String, Object> model,
-            HttpServletRequest request
+            Map<String, Object> model
     ){
         Cart cartSession = cartService.getCart();
         model.put("cartSession", cartSession);
-        Cart cart = new Cart();
-        for(int i = 0; i < cartSession.getCartSize(); i++){
-            cart.addCartItem(cartSession.getCartItemList().get(i).getProductId(), 0);
-        }
-        model.put("cart", cart);
         List cartItemNames = cartService.getCartItemNamesList(cartSession);
         model.put("cartItemNames", cartItemNames);
         return "cartPage";
@@ -45,8 +54,8 @@ public class CartController {
     @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody JsonResponse addProductsToCart(
             @Valid @ModelAttribute(value="cartItem")CartItem cartItem,
-            BindingResult resultCartItem,
-            HttpServletRequest request){
+            BindingResult resultCartItem
+    ){
         JsonResponse jsonResponse = new JsonResponse();
         Cart cart = cartService.getCart();
         if(!resultCartItem.hasErrors()){
@@ -66,8 +75,7 @@ public class CartController {
 
     @RequestMapping(params = "delete", method = RequestMethod.POST)
     public String delete(
-            @RequestParam(required = true) Integer cartItemProductId,
-            HttpServletRequest request
+            @RequestParam(required = true) Integer cartItemProductId
     ){
         cartService.deleteCartItem(cartItemProductId);
         return "redirect:/cart";
@@ -75,16 +83,15 @@ public class CartController {
 
     @RequestMapping(params = "update", method = RequestMethod.POST)
     public String update(
-            @Valid@ModelAttribute("cart")Cart cart,
-            BindingResult resultCart,
-            HttpServletRequest request
+            @Valid@ModelAttribute("cartForm")CartForm cartForm,
+            BindingResult resultCart
     ){
         if(resultCart.hasErrors()) {
             return "cartPage";
         }else{
             Map<Integer, Integer> cartMap = new HashMap<Integer, Integer>();
-            for(CartItem cartItem: cart.getCartItemList()){
-                cartMap.put(cartItem.getProductId(), cartItem.getAmount());
+            for(CartItemForm cartItemFrom: cartForm.getCartItemFormList()){
+                cartMap.put(cartItemFrom.getProductId(), cartItemFrom.getAmount());
             }
             cartService.updateCartItem(cartMap);
             return "redirect:/cart";

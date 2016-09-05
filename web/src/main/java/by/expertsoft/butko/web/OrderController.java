@@ -46,14 +46,12 @@ public class OrderController {
     @RequestMapping(method = RequestMethod.POST)
     public String placeOrder(
             @Valid @ModelAttribute("personalInfo")PersonalInfo personalInfo,
-            BindingResult resultPersonalInfo,
-            HttpServletRequest request
+            BindingResult resultPersonalInfo
     ){
         if(resultPersonalInfo.hasErrors()) {
             return "orderInformationPage";
         }else{
             // put thank you message into flash attributes
-            //orderService.setPersonalInfo(personalInfo, request);
             return "redirect:/order/confirmation";
         }
     }

@@ -31,7 +31,7 @@
         </tr>
         <tr>
             <th>Delivery  Price</th>
-            <td><c:out value="${sessionScope.personalInfo.deliveryPrice}"/></td>
+            <!--<td><c:out value=""/></td>-->
         </tr>
         <tr>
             <th>Total Cost</th>
