@@ -1,6 +1,5 @@
 package by.expertsoft.butko.phone;
 
-import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -9,7 +8,6 @@ import java.util.List;
  */
 public abstract class AbstractCart {
     protected BigDecimal totalCost = new BigDecimal(0);
-    @Valid
     protected List<AbstractCartItem> cartItemList;
     public int getCartSize(){
         return cartItemList.size();
