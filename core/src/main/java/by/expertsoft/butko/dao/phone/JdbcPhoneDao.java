@@ -2,6 +2,7 @@ package by.expertsoft.butko.dao.phone;
 
 import by.expertsoft.butko.phone.Phone;
 import by.expertsoft.butko.tools.PhoneMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -32,6 +33,7 @@ public class JdbcPhoneDao implements PhoneDao
             "WHERE mobile_id =:m_id";
     private static String SQL_FIND_PRODUCER_BY_NAME = "SELECT producer_id FROM PRODUCERS WHERE producer_name = :p_name";
 
+    @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     public void insert(Phone phone) {
@@ -83,7 +85,4 @@ public class JdbcPhoneDao implements PhoneDao
         namedParameterJdbcTemplate.update(SQL_UPDATE_MOBILEPHONES, params);
     }
 
-    public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
-    }
 }
