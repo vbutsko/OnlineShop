@@ -1,10 +1,13 @@
 package by.expertsoft.butko.forms;
 
+import javax.validation.constraints.Min;
+
 /**
  * Created by wladek on 05.09.16.
  */
 public class CartItemForm {
     private int productId;
+    @Min(value = 1, message = "amount must be integer greater than 0")
     private int amount;
 
     public int getProductId() {
