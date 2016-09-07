@@ -1,6 +1,5 @@
 package by.expertsoft.butko.web;
 
-import by.expertsoft.butko.phone.Cart;
 import by.expertsoft.butko.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

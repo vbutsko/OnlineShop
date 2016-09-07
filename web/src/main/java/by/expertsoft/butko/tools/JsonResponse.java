@@ -1,9 +1,9 @@
-package by.expertsoft.butko.phone;
+package by.expertsoft.butko.tools;
 
-import com.sun.corba.se.spi.ior.ObjectKey;
 
 /**
  * Created by wladek on 25.08.16.
+ * TODO: move to web
  */
 public class JsonResponse {
     private String status = null;

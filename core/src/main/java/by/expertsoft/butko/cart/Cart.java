@@ -1,4 +1,4 @@
-package by.expertsoft.butko.phone;
+package by.expertsoft.butko.cart;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

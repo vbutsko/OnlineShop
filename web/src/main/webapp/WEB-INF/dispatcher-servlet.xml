@@ -45,15 +45,16 @@
         <property name="password" value="05051968"/>
     </bean>
 
-    <!-- NamedParameterJdbcTemplate for JdbcPhoneDao -->
+    <!-- NamedParameterJdbcTemplate for JdbcPhoneDao, JdbcOrderDao -->
     <bean class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate" id="namedParameterJdbcTemplate">
         <constructor-arg type="javax.sql.DataSource" ref="dataSource"/>
     </bean>
 
     <!-- JdbcPhoneDao for controllers -->
-    <bean id="daoService" class="by.expertsoft.butko.dao.phone.JdbcPhoneDao">
-        <!--<property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate" />-->
-    </bean>
+    <bean id="jdbcPhoneDao" class="by.expertsoft.butko.dao.phone.JdbcPhoneDao"/>
+
+    <!-- JdbcOrderDao for controllers -->
+    <bean id="jdbcOrderDao" class="by.expertsoft.butko.dao.order.JdbcOrderDao"/>
 
     <!-- CartService for controllers -->
     <bean id="cartService" class="by.expertsoft.butko.service.CartService"/>

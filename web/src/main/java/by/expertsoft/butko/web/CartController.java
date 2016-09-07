@@ -1,9 +1,10 @@
 package by.expertsoft.butko.web;
 
+import by.expertsoft.butko.cart.Cart;
 import by.expertsoft.butko.forms.CartForm;
 import by.expertsoft.butko.forms.CartItemForm;
-import by.expertsoft.butko.phone.*;
 import by.expertsoft.butko.service.CartService;
+import by.expertsoft.butko.tools.JsonResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -53,7 +54,8 @@ public class CartController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public @ResponseBody JsonResponse addProductsToCart(
+    public @ResponseBody
+    JsonResponse addProductsToCart(
             @Valid @ModelAttribute(value="cartItemForm")CartItemForm cartItemForm,
             BindingResult resultCartItem
     ){
@@ -66,7 +68,7 @@ public class CartController {
                                     " x" + cartItemForm.getAmount() +" now in your Cart.");
         }else{
             jsonResponse.setStatus("FAIL");
-            jsonResponse.setResult("amount must be integer greater or equals than 1");
+            jsonResponse.setResult("amount must be integer greater than 0");
         }
         jsonResponse.setStatusBar(cart.getTotalAmount() + " :Amount; "
                                 + cart.getTotalCost() + ": Total");

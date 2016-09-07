@@ -1,6 +1,6 @@
 <%@ page import="java.math.BigDecimal" %>
-<%@ page import="by.expertsoft.butko.phone.PersonalInfo" %>
-<%@ page import="by.expertsoft.butko.phone.Cart" %><%--
+<%@ page import="by.expertsoft.butko.cart.PersonalInfo" %>
+<%@ page import="by.expertsoft.butko.cart.Cart" %><%--
   Created by IntelliJ IDEA.
   User: wladek
   Date: 15.08.16

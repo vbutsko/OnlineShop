@@ -1,4 +1,4 @@
-package by.expertsoft.butko.phone;
+package by.expertsoft.butko.cart;
 
 import java.math.BigDecimal;
 
@@ -7,7 +7,7 @@ import java.math.BigDecimal;
  */
 public class Order extends AbstractCart {
     private BigDecimal deliveryCost = new BigDecimal(5);
-    private boolean isDelivered = false;
+    private int orderId;
     private PersonalInfo personalInfo;
 
     public BigDecimal getTotalCost() {
@@ -22,15 +22,24 @@ public class Order extends AbstractCart {
         this.personalInfo = personalInfo;
     }
 
-    public boolean isDelivered() {
-        return isDelivered;
-    }
-
-    public void setDelivered(boolean delivered) {
-        isDelivered = delivered;
-    }
-
     public Order(){
         personalInfo = new PersonalInfo();
+    }
+
+
+    public BigDecimal getDeliveryCost() {
+        return deliveryCost;
+    }
+
+    public void setDeliveryCost(BigDecimal deliveryCost) {
+        this.deliveryCost = deliveryCost;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 }
