@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  * Created by wladek on 03.09.16.
  */
-public class Order extends AbstractCart {
+public class Order extends AbstractCart<OrderItem> {
     private BigDecimal deliveryCost = new BigDecimal(5);
     private int orderId;
     private PersonalInfo personalInfo;

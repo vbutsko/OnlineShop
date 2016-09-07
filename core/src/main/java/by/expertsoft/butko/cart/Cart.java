@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 
-public class Cart extends AbstractCart{
+public class Cart extends AbstractCart<CartItem>{
 
     public void addCartItem(int productId, int amount){
         for(AbstractCartItem cartItem: cartItemList){
@@ -30,7 +30,7 @@ public class Cart extends AbstractCart{
         return (CartItem) cartItemList.get(id);
     }
     public Cart(){
-        cartItemList = new ArrayList<AbstractCartItem>();
+        cartItemList = new ArrayList<CartItem>();
     }
     public void setTotalCost(BigDecimal totalCost){
         this.totalCost = totalCost;
