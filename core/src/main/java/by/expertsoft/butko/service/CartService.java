@@ -40,6 +40,7 @@ public class CartService {
     }
     public void setCart(Cart cart){
         this.cart = cart;
+        setTotalCost();
     }
     public void deleteCartItem(int cartItemProductId){
         Cart cart = getCart();
@@ -66,6 +67,7 @@ public class CartService {
     }
     public void clearCart(){
         cart.getCartItemList().clear();
+        setTotalCost();
     }
     public void updateCartItem(Map<Integer, Integer> cartMap){
         Cart cart = getCart();
