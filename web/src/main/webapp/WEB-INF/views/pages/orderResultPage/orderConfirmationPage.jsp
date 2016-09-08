@@ -18,24 +18,24 @@
             <th>Name</th>
             <th>Amount</th>
         </tr>
-        <c:forEach var="product" items="${cartSession.cartItemList}" varStatus="count">
+        <c:forEach var="product" items="${order.cartItemList}" varStatus="count">
             <tr>
-                <td><c:out value="${count.index + 1} : ${cartItemNames[count.index]}"/></td>
+                <td><c:out value="${count.index + 1} : "/></td> <!--${cartItemNames[count.index]}-->
                 <td><c:out value="${product.amount}"/></td>
             </tr>
         </c:forEach>
         <tr/><td/><td/>
         <tr>
             <th>Total Amount</th>
-            <td>${cartSession.getTotalAmount()}</td>
+            <td>${order.getTotalAmount()}</td>
         </tr>
         <tr>
             <th>Delivery  Price</th>
-            <!--<td><c:out value=""/></td>-->
+            <td><c:out value="${order.deliveryPrice}"/></td>
         </tr>
         <tr>
             <th>Total Cost</th>
-            <td>${cartSession.totalCost}</td>
+            <td>${order.totalCost + order.deliveryPrice}</td>
         </tr>
         <tr>
             <td>fist name</td>

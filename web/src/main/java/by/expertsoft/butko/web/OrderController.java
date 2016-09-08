@@ -50,9 +50,15 @@ public class OrderController {
         if(resultPersonalInfo.hasErrors()) {
             return "orderInformationPage";
         }else{
-            orderService.placeOrder(cartService.getCart(), personalInfo);
+            try {
+                String orderId = orderService.placeOrder(cartService.getCart(), personalInfo);
+                cartService.clearCart();
+                return "redirect:/order/confirmation/"+orderId;
+            }
+            catch(RuntimeException ex){
+                return "redirect:home";
+            }
             // put thank you message into flash attributes
-            return "redirect:/order/confirmation";
         }
     }
 }

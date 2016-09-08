@@ -25,7 +25,7 @@
         </tr>
     </table>
     <div class="pull-right mobile_shop">
-            <input name="amount" value="1" size="10" placeholder="amount" type="number" min="1">
+            <input name="amount" value="1" size="10" placeholder="amount" type="phoneNumber" min="1">
             <sf:errors path="amount" cssClass="error" />
             <button class="add_shop">add to cart</button>
             <input type="hidden" name="productId" value="${productDetails.id}">

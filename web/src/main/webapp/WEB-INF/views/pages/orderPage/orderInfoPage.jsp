@@ -31,11 +31,12 @@
         </tr>
         <tr>
             <th>Delivery  Price</th>
-            <!--<td><c:out value=""/></td>-->
+            <!-- from where better take delivery price? -->
+            <td><c:out value="5"/></td>
         </tr>
         <tr>
             <th>Total Cost</th>
-            <td>${cartSession.totalCost}</td>
+            <td>${cartSession.totalCost + 5}</td>
         </tr>
     </table>
     <br/>
