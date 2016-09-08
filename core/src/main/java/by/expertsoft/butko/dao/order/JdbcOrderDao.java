@@ -25,6 +25,7 @@ public class JdbcOrderDao implements OrderDao {
     private static final String SQL_INSERT_INTO_ORDER_ITEMS = "INSERT INTO ORDER_ITEMS (order_id, product_id, amount, price_for_one) " +
             "VALUES (:order_id, :product_id, :amount, :price_for_one)";
     private static final String SQL_SELECT_ALL_RECORDS = "SELECT * FROM ORDERS JOIN ORDER_ITEMS ON orders.order_id = order_items.order_id";
+    private static final String SQL_SELECT_BY_ORDER_ID = "SELECT * FROM ORDERS JOIN ORDER_ITEMS ON orders.order_id = order_items.order_id WHERE ORDERS.order_id = :order_id ";
     private static final String SQL_UPDATE_ORDERS = "UPDATE ORDERS SET delivered_status = :delivered_status "+
             "WHERE order_id = :order_id";
 
@@ -38,7 +39,6 @@ public class JdbcOrderDao implements OrderDao {
     public void insert(Order order) {
         Map<String, Object> params = new HashMap<String, Object>();
         String orderId = getCurrentTimeStamp();
-        //orderId = orderId.substring(0,16);
         order.setOrderId(orderId);
         System.out.println(orderId);
         params.put("order_id", orderId);
@@ -62,7 +62,12 @@ public class JdbcOrderDao implements OrderDao {
     public Order getById(Integer id) {
         throw new RuntimeException("The operation is not supported");
     }
-
+    public Order getById(String orderId){
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("order_id", orderId);
+        List<Order> orderList = (List) namedParameterJdbcTemplate.query(SQL_SELECT_BY_ORDER_ID, params, new OrderSetExtractor());
+        return orderList.get(0);
+    }
     @Override
     public void remove(Order order) {
         throw new RuntimeException("The operation is not supported");
