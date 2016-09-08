@@ -11,14 +11,6 @@ public class Order extends AbstractCart<OrderItem> {
     private boolean deliveredStatus = false;
     private PersonalInfo personalInfo;
 
-    public BigDecimal getTotalCost() {
-        return deliveryPrice.add(totalCost);
-    }
-
-    public void setTotalCost(BigDecimal totalCost){
-        this.totalCost = totalCost;
-    }
-
     public PersonalInfo getPersonalInfo() {
         return personalInfo;
     }

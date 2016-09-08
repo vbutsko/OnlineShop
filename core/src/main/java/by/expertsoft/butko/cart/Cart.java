@@ -35,7 +35,4 @@ public class Cart extends AbstractCart<CartItem>{
     public void setTotalCost(BigDecimal totalCost){
         this.totalCost = totalCost;
     }
-    public BigDecimal getTotalCost()  {
-        return totalCost;
-    }
 }

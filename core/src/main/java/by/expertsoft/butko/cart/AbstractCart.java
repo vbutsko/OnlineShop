@@ -15,12 +15,14 @@ public abstract class AbstractCart<T extends AbstractCartItem> {
     }
     public int getTotalAmount() {
         int amount = 0;
-        for(T cartItem: cartItemList){
+        for(AbstractCartItem cartItem: cartItemList){
             amount += cartItem.getAmount();
         }
         return amount;
     }
-    public abstract BigDecimal getTotalCost();
+    public BigDecimal getTotalCost(){
+        return totalCost;
+    }
     public void setCartItemList(List<T> cartItemList){
         this.cartItemList = cartItemList;
     }
