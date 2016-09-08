@@ -6,12 +6,17 @@ import java.math.BigDecimal;
  * Created by wladek on 03.09.16.
  */
 public class Order extends AbstractCart<OrderItem> {
-    private BigDecimal deliveryCost = new BigDecimal(5);
-    private int orderId;
+    private BigDecimal deliveryPrice = new BigDecimal(5);
+    private String orderId;
+    private boolean deliveredStatus = false;
     private PersonalInfo personalInfo;
 
     public BigDecimal getTotalCost() {
-        return deliveryCost.add(totalCost);
+        return deliveryPrice.add(totalCost);
+    }
+
+    public void setTotalCost(BigDecimal totalCost){
+        this.totalCost = totalCost;
     }
 
     public PersonalInfo getPersonalInfo() {
@@ -26,20 +31,33 @@ public class Order extends AbstractCart<OrderItem> {
         personalInfo = new PersonalInfo();
     }
 
-
-    public BigDecimal getDeliveryCost() {
-        return deliveryCost;
+    public Order(BigDecimal total_cost){
+        this();
+        this.totalCost = total_cost;
     }
 
-    public void setDeliveryCost(BigDecimal deliveryCost) {
-        this.deliveryCost = deliveryCost;
+    public BigDecimal getDeliveryPrice() {
+        return deliveryPrice;
     }
 
-    public int getOrderId() {
+    public void setDeliveryPrice(BigDecimal deliveryPrice) {
+        this.deliveryPrice = deliveryPrice;
+    }
+
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
+
+    public boolean getDeliveredStatus() {
+        return deliveredStatus;
+    }
+
+    public void setDeliveredStatus(boolean deliveredStatus) {
+        this.deliveredStatus = deliveredStatus;
+    }
+
 }

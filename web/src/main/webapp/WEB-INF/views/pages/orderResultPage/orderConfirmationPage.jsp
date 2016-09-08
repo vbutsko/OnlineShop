@@ -46,8 +46,8 @@
             <td>${personalInfo.lastName}</td>
         </tr>
         <tr>
-            <td>number</td>
-            <td>${personalInfo.number}</td>
+            <td>phoneNumber</td>
+            <td>${personalInfo.phoneNumber}</td>
         </tr>
     </table>
 </div>

@@ -51,8 +51,8 @@
                 <td><sf:input path="lastName" value="${personalInfo.lastName}"/></td>
             </tr>
             <tr>
-                <td><sf:label path="number">number</sf:label></td>
-                <td><sf:input path="number" value="${personalInfo.number}"/></td>
+                <td><sf:label path="phoneNumber">phoneNumber</sf:label></td>
+                <td><sf:input path="phoneNumber" value="${personalInfo.phoneNumber}"/></td>
             </tr>
         </table>
         <div class="pull-right">

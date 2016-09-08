@@ -1,14 +1,12 @@
 package by.expertsoft.butko.cart;
 
-import java.math.BigDecimal;
-
 /**
  * Created by wladek on 28.08.16.
  */
 public class PersonalInfo {
     private String firstName;
     private String lastName;
-    private String number;
+    private String phoneNumber;
     public String getFirstName() {
         return firstName;
     }
@@ -25,11 +23,11 @@ public class PersonalInfo {
         this.lastName = lastName;
     }
 
-    public String getNumber() {
-        return number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }
