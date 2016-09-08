@@ -32,17 +32,14 @@ public class OrderSetExtractor implements ResultSetExtractor {
                 String firstName = resultSet.getString("first_name");
                 String lastName = resultSet.getString("last_name");
                 String phoneNumber = resultSet.getString("phone_number");
-                order = new Order();
+                order = new Order(totalCost);
                 order.setOrderId(orderId);
                 order.setDeliveredStatus(deliveredStatus);
                 order.setDeliveryPrice(deliveryPrice);
-                order.setTotalCost(totalCost);
                 PersonalInfo personalInfo = order.getPersonalInfo();
                 personalInfo.setFirstName(firstName);
                 personalInfo.setLastName(lastName);
                 personalInfo.setPhoneNumber(phoneNumber);
-                //order.setPersonalInfo(personalInfo);
-
                 map.put(orderId, order);
             }
             OrderItem orderItem = new OrderItem(resultSet.getBigDecimal("price_for_one"));
