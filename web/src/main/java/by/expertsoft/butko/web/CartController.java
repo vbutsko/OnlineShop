@@ -46,9 +46,9 @@ public class CartController {
     public String getCartList(
             Map<String, Object> model
     ){
-        Cart cartSession = cartService.getCart();
-        model.put("cartSession", cartSession);
-        List cartItemNames = cartService.getCartItemNamesList(cartSession);
+        Cart cart = cartService.getCart();
+        model.put("cart", cart);
+        List cartItemNames = cartService.getCartItemNamesList(cart);
         model.put("cartItemNames", cartItemNames);
         return "cartPage";
     }
@@ -91,8 +91,8 @@ public class CartController {
             Map<String, Object> model
     ){
         if(resultCart.hasErrors()) {
-            Cart cartSession = cartService.getCart();
-            model.put("cartSession", cartSession);
+            Cart cart = cartService.getCart();
+            model.put("cart", cart);
             return "cartPage";
         }else{
             Map<Integer, Integer> cartMap = new HashMap<Integer, Integer>();

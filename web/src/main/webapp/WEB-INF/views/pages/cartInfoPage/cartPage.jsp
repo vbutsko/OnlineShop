@@ -12,7 +12,7 @@
 <div class="container-fluid">
     <sf:form method="post" action="/web/cart" modelAttribute="cartForm" methodParam="update">
         <fieldset>
-            <c:forEach var="product" items="${cartSession.cartItemList}" varStatus="count">
+            <c:forEach var="product" items="${cart.cartItemList}" varStatus="count">
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-lg-5 col-md-5">
@@ -28,13 +28,13 @@
                     </div>
                 </div>
             </c:forEach>
-            <c:if test="${cartSession.getCartSize() > 0}">
+            <c:if test="${cart.getCartSize() > 0}">
                 <div class="pull-right">
                     <input class="pull-right" type="submit" name="update" value="Update"/>
                     <button formaction="/web/order" formmethod="get" type="submit">fill order information</button>
                 </div>
                 <div class="row">
-                    <c:out value="Total: ${cartSession.totalCost}"/>
+                    <c:out value="Total: ${cart.totalCost}"/>
                 </div>
             </c:if>
         </fieldset>

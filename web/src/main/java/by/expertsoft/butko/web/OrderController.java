@@ -36,7 +36,7 @@ public class OrderController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String getCartList(Map<String, Object> model){
-        model.put("cartSession", cartService.getCart());
+        model.put("cart", cartService.getCart());
         List cartItemNames = cartService.getCartItemNamesList(cartService.getCart());
         model.put("cartItemNames", cartItemNames);
         return "orderInformationPage";

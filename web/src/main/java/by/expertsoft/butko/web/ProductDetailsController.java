@@ -31,7 +31,7 @@ public class ProductDetailsController {
     ){
         Phone phone = (Phone)jdbcPhoneDao.getById(id);
         model.put("productDetails", phone);
-        model.put("cartSession", cartService.getCart());
+        model.put("cart", cartService.getCart());
         return "productDetails";
     }
 }

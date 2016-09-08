@@ -25,7 +25,7 @@ public class ProductListController {
     public String showMobilephonesList(Map<String, Object> model){
         List productList = jdbcPhoneDao.getList();
         model.put("productList", productList);
-        model.put("cartSession", cartService.getCart());
+        model.put("cart", cartService.getCart());
         return "productList";
     }
 }

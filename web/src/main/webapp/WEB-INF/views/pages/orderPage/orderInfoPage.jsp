@@ -18,7 +18,7 @@
             <th>Name</th>
             <th>Amount</th>
         </tr>
-        <c:forEach var="product" items="${cartSession.cartItemList}" varStatus="count">
+        <c:forEach var="product" items="${cart.cartItemList}" varStatus="count">
                 <tr>
                     <td><c:out value="${count.index + 1} : ${cartItemNames[count.index]}"/></td>
                     <td><c:out value="${product.amount}"/></td>
@@ -27,7 +27,7 @@
         <tr/><td/><td/>
         <tr>
             <th>Total Amount</th>
-            <td><c:out value="${cartSession.getTotalAmount()}"/></td>
+            <td><c:out value="${cart.getTotalAmount()}"/></td>
         </tr>
         <tr>
             <th>Delivery  Price</th>
@@ -36,7 +36,7 @@
         </tr>
         <tr>
             <th>Total Cost</th>
-            <td>${cartSession.totalCost + 5}</td>
+            <td>${cart.totalCost + 5}</td>
         </tr>
     </table>
     <br/>
