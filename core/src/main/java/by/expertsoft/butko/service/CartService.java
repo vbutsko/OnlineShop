@@ -28,7 +28,7 @@ public class CartService {
     public void addCartItem(int productId, int amount){
         Cart cart = getCart();
         cart.addCartItem(productId, amount);
-        setTotalCost(cart);
+        setTotalCost();
         setCart(cart);
     }
     public Cart getCart(){
@@ -44,10 +44,10 @@ public class CartService {
     public void deleteCartItem(int cartItemProductId){
         Cart cart = getCart();
         cart.deleteCartItem(cartItemProductId);
-        setTotalCost(cart);
+        setTotalCost();
         setCart(cart);
     }
-    private void setTotalCost(Cart cart){
+    private void setTotalCost(){
         BigDecimal totalCost = new BigDecimal(0);
         for(AbstractCartItem cartItem: cart.getCartItemList()){
             totalCost = totalCost.add((jdbcPhoneDao.getById(cartItem.getProductId())).getPrice().multiply(BigDecimal.valueOf(cartItem.getAmount())));
@@ -64,13 +64,15 @@ public class CartService {
         }
         return result;
     }
-
+    public void clearCart(){
+        cart.getCartItemList().clear();
+    }
     public void updateCartItem(Map<Integer, Integer> cartMap){
         Cart cart = getCart();
         for(AbstractCartItem cartItem: cart.getCartItemList()){
             cartItem.setAmount(cartMap.get(cartItem.getProductId()));
         }
-        setTotalCost(cart);
+        setTotalCost();
         setCart(cart);
     }
 }
