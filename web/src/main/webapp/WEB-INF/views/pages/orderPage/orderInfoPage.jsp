@@ -27,11 +27,11 @@
         <tr/><td/><td/>
         <tr>
             <th>Total Amount</th>
-            <td><c:out value="${cart.getTotalAmount()}"/></td>
+            <td><c:out value="${cart.totalAmount}"/></td>
         </tr>
         <tr>
             <th>Delivery  Price</th>
-            <!-- from where better take delivery price? -->
+
             <td><c:out value="5"/></td>
         </tr>
         <tr>
@@ -45,15 +45,24 @@
         <table class="table table-striped table-bordered list-group-item">
             <tr>
                 <td><sf:label path="firstName">fist name</sf:label></td>
-                <td><sf:input path="firstName" value="${personalInfo.firstName}"/></td>
+                <td>
+                    <sf:input path="firstName" value="${personalInfo.firstName}"/><br/>
+                    <sf:errors path="firstName" cssClass="error" cssStyle="color:red"/>
+                </td>
             </tr>
             <tr>
                 <td><sf:label path="lastName">last name</sf:label></td>
-                <td><sf:input path="lastName" value="${personalInfo.lastName}"/></td>
+                <td>
+                    <sf:input path="lastName" value="${personalInfo.lastName}"/><br/>
+                    <sf:errors path="lastName" cssClass="error" cssStyle="color:red"/>
+                </td>
             </tr>
             <tr>
                 <td><sf:label path="phoneNumber">phoneNumber</sf:label></td>
-                <td><sf:input path="phoneNumber" value="${personalInfo.phoneNumber}"/></td>
+                <td>
+                    <sf:input path="phoneNumber" value="${personalInfo.phoneNumber}"/><br/>
+                    <sf:errors path="phoneNumber" cssClass="error" cssStyle="color:red"/>
+                </td>
             </tr>
         </table>
         <div class="pull-right">

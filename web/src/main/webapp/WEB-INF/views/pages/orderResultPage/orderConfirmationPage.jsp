@@ -27,7 +27,7 @@
         <tr/><td/><td/>
         <tr>
             <th>Total Amount</th>
-            <td>${order.getTotalAmount()}</td>
+            <td>${order.totalAmount}</td>
         </tr>
         <tr>
             <th>Delivery  Price</th>

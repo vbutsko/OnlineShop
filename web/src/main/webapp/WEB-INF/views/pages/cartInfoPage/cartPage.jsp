@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </c:forEach>
-            <c:if test="${cart.getCartSize() > 0}">
+            <c:if test="${cart.cartSize > 0}">
                 <div class="pull-right">
                     <input class="pull-right" type="submit" name="update" value="Update"/>
                     <button formaction="/web/order" formmethod="get" type="submit">fill order information</button>
