@@ -6,7 +6,9 @@ import by.expertsoft.butko.tools.OrderSetExtractor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -36,6 +38,7 @@ public class JdbcOrderDao implements OrderDao {
         return strDate;
     }
     @Override
+    @Transactional
     public void insert(Order order) {
         Map<String, Object> params = new HashMap<String, Object>();
         String orderId = getCurrentTimeStamp();
