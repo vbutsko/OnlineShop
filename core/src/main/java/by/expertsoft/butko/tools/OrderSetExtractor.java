@@ -12,14 +12,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by wladek on 05.09.16.
  */
-public class OrderSetExtractor implements ResultSetExtractor {
+public class OrderSetExtractor implements ResultSetExtractor<List<Order>> {
     @Override
-    public Object extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+    public List<Order> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
         Map<String, Order> map = new HashMap<String, Order>();
         Order order = null;
         while (resultSet.next()) {
