@@ -60,7 +60,10 @@
     <!-- CartService for controllers -->
     <bean id="cartService" class="by.expertsoft.butko.service.CartService"/>
 
-    <!-- PersonalInfoService for controllers -->
+    <!-- OrderService for controllers -->
     <bean id="orderService" class="by.expertsoft.butko.service.OrderService"/>
+
+    <!-- OrderInformationService for controllers -->
+    <bean id="orderInformationService" class="by.expertsoft.butko.service.OrderInformationService"/>
 
 </beans>

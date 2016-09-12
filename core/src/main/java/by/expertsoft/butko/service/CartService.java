@@ -1,5 +1,6 @@
 package by.expertsoft.butko.service;
 
+import by.expertsoft.butko.cart.AbstractCart;
 import by.expertsoft.butko.dao.phone.PhoneDao;
 import by.expertsoft.butko.cart.AbstractCartItem;
 import by.expertsoft.butko.cart.Cart;
@@ -54,16 +55,6 @@ public class CartService {
             totalCost = totalCost.add((jdbcPhoneDao.getById(cartItem.getProductId())).getPrice().multiply(BigDecimal.valueOf(cartItem.getAmount())));
         }
         cart.setTotalCost(totalCost);
-    }
-    public String getCartItemName(int productId){
-        return jdbcPhoneDao.getById(productId).getName();
-    }
-    public List getCartItemNamesList(Cart cart){
-        List result = new ArrayList(cart.getCartSize());
-        for(AbstractCartItem cartItem: cart.getCartItemList()){
-            result.add(getCartItemName(cartItem.getProductId()));
-        }
-        return result;
     }
     public void clearCart(){
         cart.getCartItemList().clear();

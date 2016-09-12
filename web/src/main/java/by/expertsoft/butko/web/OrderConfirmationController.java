@@ -2,6 +2,7 @@ package by.expertsoft.butko.web;
 
 import by.expertsoft.butko.cart.Order;
 import by.expertsoft.butko.service.CartService;
+import by.expertsoft.butko.service.OrderInformationService;
 import by.expertsoft.butko.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,14 +25,16 @@ public class OrderConfirmationController {
 
     @Autowired
     private CartService cartService;
+    @Autowired
+    private OrderInformationService orderInformationService;
 
     // map .../confirmation/<orderid>
     @RequestMapping(value = "/{orderId}",  method = RequestMethod.GET)
     public String showConfirmationInformation(@PathVariable String orderId, Map<String, Object> model){
         Order order = orderService.getOrder(orderId);
-        model.put("order", order);
-        //List cartItemNames = cartService.getCartItemNamesList(order.getCartItemList());
-        //model.put("cartItemNames", cartItemNames);
+        model.put("order",order);
+        List cartItemNames = orderInformationService.getCartItemNamesList(order);
+        model.put("cartItemNames", cartItemNames);
         return "orderConfirmationPage";
     }
 

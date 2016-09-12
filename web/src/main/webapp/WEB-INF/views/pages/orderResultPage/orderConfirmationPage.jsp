@@ -20,7 +20,7 @@
         </tr>
         <c:forEach var="product" items="${order.cartItemList}" varStatus="count">
             <tr>
-                <td><c:out value="${count.index + 1} : "/></td> <!--${cartItemNames[count.index]}-->
+                <td><c:out value="${count.index + 1} : ${cartItemNames[count.index]}"/></td>
                 <td><c:out value="${product.amount}"/></td>
             </tr>
         </c:forEach>

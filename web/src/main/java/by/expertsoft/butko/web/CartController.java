@@ -4,10 +4,13 @@ import by.expertsoft.butko.cart.Cart;
 import by.expertsoft.butko.forms.CartForm;
 import by.expertsoft.butko.forms.CartItemForm;
 import by.expertsoft.butko.service.CartService;
+import by.expertsoft.butko.service.OrderInformationService;
 import by.expertsoft.butko.tools.JsonResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,7 +29,8 @@ public class CartController {
 
     @Autowired
     private CartService cartService;
-
+    @Autowired
+    private OrderInformationService orderInformationService;
     @ModelAttribute
     public CartForm populateCartForm(){
         CartForm cartForm = new CartForm();
@@ -48,7 +52,7 @@ public class CartController {
     ){
         Cart cart = cartService.getCart();
         model.put("cart", cart);
-        List cartItemNames = cartService.getCartItemNamesList(cart);
+        List cartItemNames = orderInformationService.getCartItemNamesList(cart);
         model.put("cartItemNames", cartItemNames);
         return "cartPage";
     }
@@ -64,7 +68,7 @@ public class CartController {
         if(!resultCartItem.hasErrors()){
             cartService.addCartItem(cartItemForm.getProductId(), cartItemForm.getAmount());
             jsonResponse.setStatus("SUCCESS");
-            jsonResponse.setResult(cartService.getCartItemName(cartItemForm.getProductId()) +
+            jsonResponse.setResult(orderInformationService.getCartItemName(cartItemForm.getProductId()) +
                                     " x" + cartItemForm.getAmount() +" now in your Cart.");
         }else{
             jsonResponse.setStatus("FAIL");
@@ -91,13 +95,16 @@ public class CartController {
             Map<String, Object> model
     ){
         if(resultCart.hasErrors()) {
+            //?????? ValidationUtils.rejectIfEmptyOrWhitespace((Errors) resultCart.getAllErrors(), "error.amount", "should be integer greater than 0");
             Cart cart = cartService.getCart();
+            List cartItemNames = orderInformationService.getCartItemNamesList(cart);
+            model.put("cartItemNames", cartItemNames);
             model.put("cart", cart);
             return "cartPage";
         }else{
             Map<Integer, Integer> cartMap = new HashMap<Integer, Integer>();
-            for(CartItemForm cartItemFrom: cartForm.getCartItemFormList()){
-                cartMap.put(cartItemFrom.getProductId(), cartItemFrom.getAmount());
+            for(CartItemForm cartItemForm: cartForm.getCartItemFormList()){
+                cartMap.put(cartItemForm.getProductId(), cartItemForm.getAmount());
             }
             cartService.updateCartItem(cartMap);
             return "redirect:/cart";

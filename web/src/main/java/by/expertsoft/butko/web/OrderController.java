@@ -1,8 +1,10 @@
 package by.expertsoft.butko.web;
 
 
+import by.expertsoft.butko.cart.AbstractCartItem;
 import by.expertsoft.butko.cart.PersonalInfo;
 import by.expertsoft.butko.service.CartService;
+import by.expertsoft.butko.service.OrderInformationService;
 import by.expertsoft.butko.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +30,8 @@ public class OrderController {
     private CartService cartService;
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private OrderInformationService orderInformationService;
 
     @ModelAttribute
     public PersonalInfo populatePersonalInfo(){
@@ -37,21 +41,24 @@ public class OrderController {
     @RequestMapping(method = RequestMethod.GET)
     public String getCartList(Map<String, Object> model){
         model.put("cart", cartService.getCart());
-        List cartItemNames = cartService.getCartItemNamesList(cartService.getCart());
+        List cartItemNames = orderInformationService.getCartItemNamesList(cartService.getCart());
         model.put("cartItemNames", cartItemNames);
+        model.put("deliveryPrice", orderInformationService.getDeliveryPrice(cartService.getCart()));
         return "orderInformationPage";
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public String placeOrder(
             @Valid @ModelAttribute("personalInfo")PersonalInfo personalInfo,
-            BindingResult resultPersonalInfo
+            BindingResult resultPersonalInfo,
+            Map<String, Object> model
     ){
         if(resultPersonalInfo.hasErrors()) {
+            model.put("cart", cartService.getCart());
             return "orderInformationPage";
         }else{
             try {
-                String orderId = orderService.placeOrder(cartService.getCart(), personalInfo);
+                String orderId = orderService.placeOrder(cartService.getCart(), personalInfo, orderInformationService.getDeliveryPrice(cartService.getCart()));
                 cartService.clearCart();
                 return "redirect:/order/confirmation/"+orderId;
             }

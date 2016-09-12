@@ -22,7 +22,7 @@ public class OrderService {
     @Autowired
     private JdbcPhoneDao jdbcPhoneDao;
 
-    public String placeOrder(Cart cart, PersonalInfo personalInfo){
+    public String placeOrder(Cart cart, PersonalInfo personalInfo, BigDecimal deliveryPrice){
         if(cart.getCartSize() == 0){
             throw new RuntimeException("cart is empty");
         }
@@ -36,6 +36,7 @@ public class OrderService {
             orderItemList.add(orderItem);
         }
         order.setCartItemList(orderItemList);
+        order.setDeliveryPrice(deliveryPrice);
         jdbcOrderDao.insert(order);
         return order.getOrderId();
     }
