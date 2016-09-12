@@ -10,10 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by wladek on 05.09.16.
@@ -30,18 +27,38 @@ public class JdbcOrderDao implements OrderDao {
     private static final String SQL_SELECT_BY_ORDER_ID = "SELECT * FROM ORDERS JOIN ORDER_ITEMS ON orders.order_id = order_items.order_id WHERE ORDERS.order_id = :order_id ";
     private static final String SQL_UPDATE_ORDERS = "UPDATE ORDERS SET delivered_status = :delivered_status "+
             "WHERE order_id = :order_id";
+    private static final String SQL_COUNT_ORDERS_ID = "SELECT COUNT(*) FROM ORDERS WHERE order_id = :order_id";
 
-    public static String getCurrentTimeStamp() {
-        SimpleDateFormat sdfDate = new SimpleDateFormat("HHmmssSDDMMYY");
-        Date now = new Date();
-        String strDate = sdfDate.format(now);
-        return strDate;
+    public static String getRandomOrderId(int size) {
+        StringBuilder stringBuilder = new StringBuilder();
+        Random random = new Random();
+        for(int i = 0; i < size; i++){
+            int way = Math.abs(random.nextInt())%2;
+            switch (way){
+                case 0:
+                    way = 48 + Math.abs(random.nextInt())%10;
+                    break;
+                case 1:
+                    way = 65 + Math.abs(random.nextInt())%26;
+                    break;
+            }
+            stringBuilder.append((char) way);
+        }
+        return stringBuilder.toString();
     }
     @Override
     @Transactional
     public void insert(Order order) {
         Map<String, Object> params = new HashMap<String, Object>();
-        String orderId = getCurrentTimeStamp();
+        String orderId = null;
+        boolean flag = true;
+        while (flag){
+            orderId = getRandomOrderId(10);
+            params.put("order_id", orderId);
+            if( namedParameterJdbcTemplate.queryForObject(SQL_COUNT_ORDERS_ID, params, Integer.class) == 0){
+                flag = false;
+            }
+        }
         order.setOrderId(orderId);
         System.out.println(orderId);
         params.put("order_id", orderId);
