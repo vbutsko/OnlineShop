@@ -31,12 +31,14 @@
             <c:if test="${cart.cartSize > 0}">
                 <div class="pull-right">
                     <input class="pull-right" type="submit" name="update" value="Update"/>
-                    <button formaction="/web/order" formmethod="get" type="submit">fill order information</button>
-                </div>
-                <div class="row">
-                    <c:out value="Total: ${cart.totalCost}"/>
                 </div>
             </c:if>
         </fieldset>
     </sf:form>
+    <c:if test="${cart.cartSize > 0}">
+        <div class="pull-right">
+            <c:out value="Total: ${cart.totalCost}"/>
+            <input method="GET" action="/web/order" type="submit" value="fill order information">
+        </div>
+    </c:if>
 </div>
