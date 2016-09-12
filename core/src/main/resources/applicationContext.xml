@@ -11,14 +11,14 @@
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
     <context:annotation-config/>
     <context:component-scan base-package="by.expertsoft.butko.dao" />
-
+    <context:property-placeholder location="classpath:database.properties" />
 
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/onlineshop"/>
-        <property name="username" value="root"/>
-        <property name="password" value="05051968"/>
+        <property name="driverClassName" value="${jdbc.mysql.driverClassName}"/>
+        <property name="url" value="${jdbc.mysql.url}"/>
+        <property name="username" value="${jdbc.mysql.username}"/>
+        <property name="password" value="${jdbc.mysql.password}"/>
     </bean>
     <bean class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate" id="namedParameterJdbcTemplate">
         <constructor-arg type="javax.sql.DataSource" ref="dataSource"/>
