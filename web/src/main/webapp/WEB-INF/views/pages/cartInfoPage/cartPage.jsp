@@ -38,7 +38,9 @@
     <c:if test="${cart.cartSize > 0}">
         <div class="pull-right">
             <c:out value="Total: ${cart.totalCost}"/>
-            <input method="GET" action="/web/order" type="submit" value="fill order information">
+            <form method="GET" action="/web/order" >
+                <input type="submit" value="fill order information">
+            </form>
         </div>
     </c:if>
 </div>

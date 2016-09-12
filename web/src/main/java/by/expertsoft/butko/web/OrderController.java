@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -51,7 +52,8 @@ public class OrderController {
     public String placeOrder(
             @Valid @ModelAttribute("personalInfo")PersonalInfo personalInfo,
             BindingResult resultPersonalInfo,
-            Map<String, Object> model
+            Map<String, Object> model,
+            final RedirectAttributes redirectAttributes
     ){
         if(resultPersonalInfo.hasErrors()) {
             model.put("cart", cartService.getCart());
@@ -60,6 +62,7 @@ public class OrderController {
             try {
                 String orderId = orderService.placeOrder(cartService.getCart(), personalInfo, orderInformationService.getDeliveryPrice(cartService.getCart()));
                 cartService.clearCart();
+                redirectAttributes.addFlashAttribute("message", "Thank you for order. It was added to the list!");
                 return "redirect:/order/confirmation/"+orderId;
             }
             catch(RuntimeException ex){

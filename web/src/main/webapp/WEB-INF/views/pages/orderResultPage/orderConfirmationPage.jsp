@@ -12,6 +12,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <div class="container-fluid">
+    <h1 style="font-color: green ">${message}</h1>
     <p align="center" style="font-size: large">Total order information</p>
     <table class="table table-striped table-bordered list-group-item">
         <tr>
