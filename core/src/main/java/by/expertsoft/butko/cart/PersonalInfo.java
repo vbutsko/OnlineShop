@@ -21,7 +21,7 @@ public class PersonalInfo {
     private String lastName;
 
     @Size(min=3,
-            message = "phone number must contain some characters")
+            message = "phone number must contain min 3 characters")
     @Pattern(regexp = "([0-9]+||[+][0-9]+)",
             message = "phone number must contain only numbers or can start with '+'")
     private String phoneNumber;

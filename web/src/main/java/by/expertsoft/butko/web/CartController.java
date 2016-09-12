@@ -66,7 +66,7 @@ public class CartController {
         JsonResponse jsonResponse = new JsonResponse();
         Cart cart = cartService.getCart();
         if(!resultCartItem.hasErrors()){
-            cartService.addCartItem(cartItemForm.getProductId(), cartItemForm.getAmount());
+            cartService.addCartItem(cartItemForm.getProductId(), Integer.parseInt(cartItemForm.getAmount()));
             jsonResponse.setStatus("SUCCESS");
             jsonResponse.setResult(orderInformationService.getCartItemName(cartItemForm.getProductId()) +
                                     " x" + cartItemForm.getAmount() +" now in your Cart.");
@@ -104,7 +104,7 @@ public class CartController {
         }else{
             Map<Integer, Integer> cartMap = new HashMap<Integer, Integer>();
             for(CartItemForm cartItemForm: cartForm.getCartItemFormList()){
-                cartMap.put(cartItemForm.getProductId(), cartItemForm.getAmount());
+                cartMap.put(cartItemForm.getProductId(), Integer.parseInt(cartItemForm.getAmount()));
             }
             cartService.updateCartItem(cartMap);
             return "redirect:/cart";
