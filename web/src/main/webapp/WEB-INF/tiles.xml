@@ -48,4 +48,15 @@
         <put-attribute name="body" value="/WEB-INF/views/pages/orderResultPage/orderConfirmationPage.jsp"/>
     </definition>
 
+    <!-- Default Error View -->
+    <definition name="defaultErrorView" extends="base.definition">
+        <put-attribute name="title" value="Error"/>
+        <put-attribute name="body" value="/WEB-INF/views/errors/error.jsp"/>
+    </definition>
+
+    <!--  Error CartNotFound -->
+    <definition name="cartNotFoundPage" extends="base.definition">
+        <put-attribute name="title" value="Error"/>
+        <put-attribute name="body" value="/WEB-INF/views/errors/errorPage.jsp"/>
+    </definition>
 </tiles-definitions>
