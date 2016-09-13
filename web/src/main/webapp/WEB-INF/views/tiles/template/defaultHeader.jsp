@@ -11,7 +11,6 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <div class="container-fluid">
     <h1>Online Shop. Choose your mobilephone.</h1>
-    // implement jsp tag
     <p class="pull-right" id="headerTotal" onload="updateTotalBar()"></p>
     <br/>
 </div>

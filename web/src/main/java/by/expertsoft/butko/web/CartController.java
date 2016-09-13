@@ -95,7 +95,6 @@ public class CartController {
             Map<String, Object> model
     ){
         if(resultCart.hasErrors()) {
-            //?????? ValidationUtils.rejectIfEmptyOrWhitespace((Errors) resultCart.getAllErrors(), "error.amount", "should be integer greater than 0");
             Cart cart = cartService.getCart();
             List cartItemNames = orderInformationService.getCartItemNamesList(cart);
             model.put("cartItemNames", cartItemNames);

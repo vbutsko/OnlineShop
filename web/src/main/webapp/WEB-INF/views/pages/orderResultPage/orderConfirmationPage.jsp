@@ -11,8 +11,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="/WEB-INF/tagLib.tld" prefix="tt" %>
 <div class="container-fluid">
-    <h1 style="font-color: green ">${message}</h1>
+    <tt:thank order_id="${order.orderId}"> <c:out value="${message}"/></tt:thank>
     <p align="center" style="font-size: large">Total order information</p>
     <table class="table table-striped table-bordered list-group-item">
         <tr>

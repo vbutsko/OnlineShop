@@ -38,7 +38,11 @@ public class OrderController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
+    @ExceptionHandler({CartNotFoundException.class})
     public String getCartList(Map<String, Object> model){
+        if(cartService.getCart().getCartSize() == 0){
+            throw new CartNotFoundException("Your cart is empty.");
+        }
         model.put("cart", cartService.getCart());
         List cartItemNames = orderInformationService.getCartItemNamesList(cartService.getCart());
         model.put("cartItemNames", cartItemNames);
