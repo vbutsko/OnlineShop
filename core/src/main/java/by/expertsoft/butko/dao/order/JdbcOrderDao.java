@@ -33,13 +33,13 @@ public class JdbcOrderDao implements OrderDao {
         StringBuilder stringBuilder = new StringBuilder();
         Random random = new Random();
         for(int i = 0; i < size; i++){
-            int way = Math.abs(random.nextInt())%2;
+            int way = random.nextInt(2);
             switch (way){
                 case 0:
-                    way = 48 + Math.abs(random.nextInt())%10;
+                    way = 48 + random.nextInt(10);
                     break;
                 case 1:
-                    way = 65 + Math.abs(random.nextInt())%26;
+                    way = 65 + random.nextInt(26);
                     break;
             }
             stringBuilder.append((char) way);
