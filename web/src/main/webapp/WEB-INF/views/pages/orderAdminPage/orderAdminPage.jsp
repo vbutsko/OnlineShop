@@ -1,10 +1,8 @@
-<%@ page import="java.math.BigDecimal" %>
-<%@ page import="by.expertsoft.butko.cart.PersonalInfo" %>
-<%@ page import="by.expertsoft.butko.cart.Cart" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: wladek
-  Date: 15.08.16
-  Time: 13:19
+  Date: 15.09.16
+  Time: 14:00
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -13,7 +11,6 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="/WEB-INF/tagLib.tld" prefix="tt" %>
 <div class="container-fluid">
-    <tt:thank order_id="${order.orderId}"> <c:out value="${message}"/></tt:thank>
     <p align="center" style="font-size: large">Total order information</p>
     <table class="table table-striped table-bordered list-group-item">
         <tr>
@@ -22,11 +19,15 @@
         </tr>
         <c:forEach var="product" items="${order.cartItemList}" varStatus="count">
             <tr>
-                <td><c:out value="${count.index + 1} : ${cartItemNames[count.index]}"/></td>
+                <td><c:out value="${count.index + 1} : ${orderItemNames[count.index]}"/></td>
                 <td><c:out value="${product.amount}"/></td>
             </tr>
         </c:forEach>
         <tr/><td/><td/>
+        <tr>
+            <th>Order ID</th>
+            <td>${order.orderId}</td>
+        </tr>
         <tr>
             <th>Total Amount</th>
             <td>${order.totalAmount}</td>
@@ -48,8 +49,18 @@
             <td>${order.personalInfo.lastName}</td>
         </tr>
         <tr>
-            <td>phoneNumber</td>
+            <td>phone number</td>
             <td>${order.personalInfo.phoneNumber}</td>
         </tr>
+        <tr>
+            <td>delivered status</td>
+            <td>${order.deliveredStatus}</td>
+        </tr>
     </table>
+    <c:if test="${!order.deliveredStatus}">
+        <form method="post" action="/web/admin/orderlist/order" >
+            <input type="hidden" name="orderId" value="${order.orderId}"/>
+            <input type="submit" value="confirm"/>
+        </form>
+    </c:if>
 </div>

@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by wladek on 28.08.16.
@@ -52,5 +51,20 @@ public class OrderService {
 
     // TODO: implement Order placeOrder(Cart cart)
     // TODO: getOrder()
+    public List<Order> getOrderList(){
+        List<Order> orderList = jdbcOrderDao.getList();
+        Collections.sort(orderList, new Comparator<Order>() {
+            @Override
+            public int compare(Order o1, Order o2) {
+                return Boolean.valueOf(o1.getDeliveredStatus()).compareTo(Boolean.valueOf(o2.getDeliveredStatus()));
+            }
+        });
+        return orderList;
+    }
 
+    public void confirmOrder(String orderId){
+        Order order = new Order();
+        order.setOrderId(orderId);
+        jdbcOrderDao.update(order);
+    }
 }

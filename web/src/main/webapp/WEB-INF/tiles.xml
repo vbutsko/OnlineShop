@@ -53,6 +53,8 @@
         <put-attribute name="title" value="Error"/>
         <put-attribute name="body" value="/WEB-INF/views/errors/errorPage.jsp"/>
     </definition>
+
+    <!-- Error Page -->
     <definition name="error" extends="base.definition">
         <put-attribute name="title" value="Error"/>
         <put-attribute name="body" value="/WEB-INF/views/errors/error.jsp"/>
@@ -62,5 +64,17 @@
     <definition name="cartNotFoundPage" extends="base.definition">
         <put-attribute name="title" value="Error"/>
         <put-attribute name="body" value="/WEB-INF/views/errors/errorPage.jsp"/>
+    </definition>
+
+    <!-- Order List Admin Page -->
+    <definition name="orderListAdmin" extends="base.definition">
+        <put-attribute name="title" value="OrderList"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/orderListAdminPage/orderListAdminPage.jsp"/>
+    </definition>
+
+    <!-- Order Admin Page-->
+    <definition name="orderAdmin" extends="base.definition">
+        <put-attribute name="title" value="Order"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/orderAdminPage/orderAdminPage.jsp"/>
     </definition>
 </tiles-definitions>
