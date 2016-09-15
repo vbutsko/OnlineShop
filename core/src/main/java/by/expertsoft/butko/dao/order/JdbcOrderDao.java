@@ -29,7 +29,7 @@ public class JdbcOrderDao implements OrderDao {
             "WHERE order_id = :order_id";
     private static final String SQL_COUNT_ORDERS_ID = "SELECT COUNT(*) FROM ORDERS WHERE order_id = :order_id";
 
-    public static String getRandomOrderId(int size) {
+    private String getRandomOrderId(int size) {
         StringBuilder stringBuilder = new StringBuilder();
         Random random = new Random();
         for(int i = 0; i < size; i++){
