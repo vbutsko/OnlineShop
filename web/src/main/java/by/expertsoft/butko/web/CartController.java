@@ -9,8 +9,7 @@ import by.expertsoft.butko.tools.JsonResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -66,7 +65,7 @@ public class CartController {
         JsonResponse jsonResponse = new JsonResponse();
         Cart cart = cartService.getCart();
         if(!resultCartItem.hasErrors()){
-            cartService.addCartItem(cartItemForm.getProductId(), Integer.parseInt(cartItemForm.getAmount()));
+            cartService.addCartItem(cartItemForm.getProductId(), cartItemForm.getAmount());
             jsonResponse.setStatus("SUCCESS");
             jsonResponse.setResult(orderInformationService.getCartItemName(cartItemForm.getProductId()) +
                                     " x" + cartItemForm.getAmount() +" now in your Cart.");
@@ -90,7 +89,7 @@ public class CartController {
 
     @RequestMapping(params = "update", method = RequestMethod.POST)
     public String update(
-            @Valid@ModelAttribute("cartForm")CartForm cartForm,
+            @Validated @ModelAttribute("cartForm")CartForm cartForm,
             BindingResult resultCart,
             Map<String, Object> model
     ){
@@ -103,7 +102,7 @@ public class CartController {
         }else{
             Map<Integer, Integer> cartMap = new HashMap<Integer, Integer>();
             for(CartItemForm cartItemForm: cartForm.getCartItemFormList()){
-                cartMap.put(cartItemForm.getProductId(), Integer.parseInt(cartItemForm.getAmount()));
+                cartMap.put(cartItemForm.getProductId(), cartItemForm.getAmount());
             }
             cartService.updateCartItem(cartMap);
             return "redirect:/cart";

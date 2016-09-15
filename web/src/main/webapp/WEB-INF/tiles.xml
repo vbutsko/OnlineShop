@@ -51,6 +51,10 @@
     <!-- Default Error View -->
     <definition name="defaultErrorView" extends="base.definition">
         <put-attribute name="title" value="Error"/>
+        <put-attribute name="body" value="/WEB-INF/views/errors/errorPage.jsp"/>
+    </definition>
+    <definition name="error" extends="base.definition">
+        <put-attribute name="title" value="Error"/>
         <put-attribute name="body" value="/WEB-INF/views/errors/error.jsp"/>
     </definition>
 

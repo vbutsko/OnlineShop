@@ -7,5 +7,5 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <body>
-    <h3>${exception.exceptionMsg}</h3>
+    <h3>Error Page</h3>
 </body>

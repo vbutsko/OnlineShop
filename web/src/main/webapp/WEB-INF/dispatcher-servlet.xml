@@ -15,8 +15,11 @@
 
     <mvc:resources mapping="/resources/**" location="/resources/" />
 
-    <mvc:annotation-driven />
+    <mvc:annotation-driven validator="validator"/>
 
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="validationMessageSource" ref="messageSource"/>
+    </bean>
 
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.UrlBasedViewResolver">
@@ -77,5 +80,9 @@
 
     <!-- OrderInformationService for controllers -->
     <bean id="orderInformationService" class="by.expertsoft.butko.service.OrderInformationService"/>
+
+    <bean class="org.springframework.context.support.ResourceBundleMessageSource" id="messageSource">
+        <property name="basename"> <value>messages</value> </property>
+    </bean>
 
 </beans>
