@@ -10,9 +10,9 @@
      http://www.springframework.org/schema/mvc
      http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <context:component-scan base-package="by.expertsoft.butko" />
+    <context:component-scan base-package="by.expertsoft.butko.service" />
+    <context:component-scan base-package="by.expertsoft.butko.web"/>
     <context:property-placeholder location="classpath:database.properties" />
-
     <mvc:resources mapping="/resources/**" location="/resources/" />
 
     <mvc:annotation-driven validator="validator"/>
@@ -40,15 +40,6 @@
         </property>
     </bean>
 
-    <!-- Data Source for NamedParameterJdbcTemplate -->
-    <bean id="dataSource"
-          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="${jdbc.mysql.driverClassName}"/>
-        <property name="url" value="${jdbc.mysql.url}"/>
-        <property name="username" value="${jdbc.mysql.username}"/>
-        <property name="password" value="${jdbc.mysql.password}"/>
-    </bean>
-
     <!-- ExceptionHandler -->
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="exceptionMappings">
@@ -61,25 +52,7 @@
         <property name="defaultErrorView" value="error"/>
     </bean>
 
-    <!-- NamedParameterJdbcTemplate for JdbcPhoneDao, JdbcOrderDao -->
-    <bean class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate" id="namedParameterJdbcTemplate">
-        <constructor-arg type="javax.sql.DataSource" ref="dataSource"/>
-    </bean>
-
-    <!-- JdbcPhoneDao for controllers -->
-    <bean id="jdbcPhoneDao" class="by.expertsoft.butko.dao.phone.JdbcPhoneDao"/>
-
-    <!-- JdbcOrderDao for controllers -->
-    <bean id="jdbcOrderDao" class="by.expertsoft.butko.dao.order.JdbcOrderDao"/>
-
-    <!-- CartService for controllers -->
-    <bean id="cartService" class="by.expertsoft.butko.service.CartService"/>
-
-    <!-- OrderService for controllers -->
-    <bean id="orderService" class="by.expertsoft.butko.service.OrderService"/>
-
-    <!-- OrderInformationService for controllers -->
-    <bean id="orderInformationService" class="by.expertsoft.butko.service.OrderInformationService"/>
+    <bean id="cartService" class="by.expertsoft.butko.service.CartService"></bean>
 
     <bean class="org.springframework.context.support.ResourceBundleMessageSource" id="messageSource">
         <property name="basename"> <value>messages</value> </property>

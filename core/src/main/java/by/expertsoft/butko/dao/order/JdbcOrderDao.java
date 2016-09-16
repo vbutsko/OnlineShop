@@ -6,6 +6,8 @@ import by.expertsoft.butko.tools.OrderSetExtractor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
@@ -15,6 +17,7 @@ import java.util.*;
 /**
  * Created by wladek on 05.09.16.
  */
+@Component
 public class JdbcOrderDao implements OrderDao {
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -23,7 +26,7 @@ public class JdbcOrderDao implements OrderDao {
             "VALUES (:order_id, :delivered_status, :delivery_price, :total_cost, :first_name, :last_name, :phone_number)";
     private static final String SQL_INSERT_INTO_ORDER_ITEMS = "INSERT INTO ORDER_ITEMS (order_id, product_id, amount, price_for_one) " +
             "VALUES (:order_id, :product_id, :amount, :price_for_one)";
-    private static final String SQL_SELECT_ALL_RECORDS = "SELECT * FROM ORDERS JOIN ORDER_ITEMS ON orders.order_id = order_items.order_id";
+    private static final String SQL_SELECT_ALL_RECORDS = "SELECT * FROM ORDERS JOIN ORDER_ITEMS ON orders.order_id = order_items.order_id ORDER BY delivered_status DESC";
     private static final String SQL_SELECT_BY_ORDER_ID = "SELECT * FROM ORDERS JOIN ORDER_ITEMS ON orders.order_id = order_items.order_id WHERE ORDERS.order_id = :order_id ";
     private static final String SQL_UPDATE_ORDERS = "UPDATE ORDERS SET delivered_status = :delivered_status "+
             "WHERE order_id = :order_id";
@@ -59,8 +62,8 @@ public class JdbcOrderDao implements OrderDao {
                 flag = false;
             }
         }
+        orderId = orderId.substring(0, Math.min(16, orderId.length()));
         order.setOrderId(orderId);
-        System.out.println(orderId);
         params.put("order_id", orderId);
         params.put("delivered_status", order.getDeliveredStatus());
         params.put("delivery_price", order.getDeliveryPrice());

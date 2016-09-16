@@ -30,8 +30,4 @@
         <property name="dataSource" ref="dataSource" />
     </bean>
 
-    <bean id="jdbcPhoneDao" class="by.expertsoft.butko.dao.phone.JdbcPhoneDao"/>
-
-    <bean id="jdbcOrderDao" class="by.expertsoft.butko.dao.order.JdbcOrderDao"/>
-
 </beans>

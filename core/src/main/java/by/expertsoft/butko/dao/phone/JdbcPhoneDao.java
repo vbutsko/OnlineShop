@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.Map;
 /**
  * Created by wladek on 09.08.16.
  */
+@Component
 public class JdbcPhoneDao implements PhoneDao
 {
     private static String SQL_INSERT_INTO_MOBILES = "INSERT INTO MOBILEPHONES (NAME, COST, PRODUCER_ID) "+
