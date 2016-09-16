@@ -10,7 +10,7 @@
      http://www.springframework.org/schema/mvc
      http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <context:component-scan base-package="by.expertsoft.butko.service" />
+    <context:component-scan base-package="by.expertsoft.butko.service" scoped-proxy="targetClass" />
     <context:component-scan base-package="by.expertsoft.butko.web"/>
     <context:property-placeholder location="classpath:database.properties" />
     <mvc:resources mapping="/resources/**" location="/resources/" />
@@ -52,7 +52,7 @@
         <property name="defaultErrorView" value="error"/>
     </bean>
 
-    <bean id="cartService" class="by.expertsoft.butko.service.CartService"></bean>
+ <!--   <bean id="cartService" class="by.expertsoft.butko.service.CartService"></bean> -->
 
     <bean class="org.springframework.context.support.ResourceBundleMessageSource" id="messageSource">
         <property name="basename"> <value>messages</value> </property>
