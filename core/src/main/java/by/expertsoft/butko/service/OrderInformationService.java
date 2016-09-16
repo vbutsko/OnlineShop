@@ -30,6 +30,7 @@ public class OrderInformationService {
     }
 
     public <T extends AbstractCartItem> BigDecimal getDeliveryPrice(AbstractCart<T> abstractCart){
-        return new BigDecimal(5);
+        Integer price = 5 * abstractCart.getCartSize();
+        return new BigDecimal(price);
     }
 }

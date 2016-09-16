@@ -20,11 +20,14 @@ public class OrderService {
     private JdbcOrderDao jdbcOrderDao;
     @Autowired
     private JdbcPhoneDao jdbcPhoneDao;
+    @Autowired
+    private CartService cartService;
+    @Autowired
+    private OrderInformationService orderInformationService;
 
-    public String placeOrder(Cart cart, PersonalInfo personalInfo, BigDecimal deliveryPrice){
-        if(cart.getCartSize() == 0){
-            throw new RuntimeException("cart is empty");
-        }
+
+    public String placeOrder(PersonalInfo personalInfo){
+        Cart cart = cartService.getCart();
         Order order = new Order(cart.getTotalCost());
         order.setPersonalInfo(personalInfo);
         List<OrderItem> orderItemList = new ArrayList<>();
@@ -35,7 +38,7 @@ public class OrderService {
             orderItemList.add(orderItem);
         }
         order.setCartItemList(orderItemList);
-        order.setDeliveryPrice(deliveryPrice);
+        order.setDeliveryPrice(orderInformationService.getDeliveryPrice(cart));
         jdbcOrderDao.insert(order);
         return order.getOrderId();
     }
@@ -43,14 +46,11 @@ public class OrderService {
         return jdbcOrderDao.getById(orderId);
     }
 
-    //maybe better add another SQL request to JdbcPhoneDao to get phone's price???
     private BigDecimal getProductPrice(int productId){
         Phone phone = jdbcPhoneDao.getById(productId);
         return phone.getPrice();
     }
 
-    // TODO: implement Order placeOrder(Cart cart)
-    // TODO: getOrder()
     public List<Order> getOrderList(){
         List<Order> orderList = jdbcOrderDao.getList();
         Collections.sort(orderList, new Comparator<Order>() {
