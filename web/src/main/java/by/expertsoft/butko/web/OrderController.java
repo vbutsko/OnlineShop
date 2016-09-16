@@ -65,11 +65,10 @@ public class OrderController {
             if(cartService.getCart().getCartSize() == 0){
                 throw new CartNotFoundException("Your cart is empty.");
             }
-            String orderId = orderService.placeOrder(cartService.getCart(), personalInfo, orderInformationService.getDeliveryPrice(cartService.getCart()));
+            String orderId = orderService.placeOrder(personalInfo);
             cartService.clearCart();
             redirectAttributes.addFlashAttribute("message", "Thank you for order. It was added to the list!");
             return "redirect:/order/confirmation/"+orderId;
-            // put thank you message into flash attributes
         }
     }
 }
