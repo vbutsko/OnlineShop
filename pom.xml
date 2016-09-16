@@ -15,10 +15,11 @@
   <url>http://maven.apache.org</url>
 
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <junit.version>3.8.1</junit.version>
-    <springframework.version>4.3.1.RELEASE</springframework.version>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <junit.version>3.8.1</junit.version>
+      <springframework.version>4.3.1.RELEASE</springframework.version>
       <mysql.connector.version>5.1.38</mysql.connector.version>
+      <javac.validation.version>1.1.0.Final</javac.validation.version>
   </properties>
 
   <dependencies>
@@ -26,7 +27,7 @@
       <dependency>
           <groupId>javax.validation</groupId>
           <artifactId>validation-api</artifactId>
-          <version>1.1.0.Final</version>
+          <version>${javac.validation.version}</version>
       </dependency>
 
       <dependency>
@@ -53,6 +54,12 @@
       <scope>test</scope>
     </dependency>
 
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-test</artifactId>
+          <version>${springframework.version}</version>
+          <scope>test</scope>
+      </dependency>
 
 
 
@@ -60,17 +67,6 @@
           <groupId>mysql</groupId>
           <artifactId>mysql-connector-java</artifactId>
           <version>${mysql.connector.version}</version>
-      </dependency>
-      <dependency>
-          <groupId>org.springframework</groupId>
-          <artifactId>spring-context</artifactId>
-          <version>${springframework.version}</version>
-      </dependency>
-
-      <dependency>
-          <groupId>org.springframework</groupId>
-          <artifactId>spring-context</artifactId>
-          <version>${springframework.version}</version>
       </dependency>
   </dependencies>
 
