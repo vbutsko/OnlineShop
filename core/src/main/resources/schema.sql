@@ -44,6 +44,5 @@ CREATE TABLE ORDER_ITEMS(
 
     PRIMARY KEY (id),
 
-    FOREIGN KEY (order_id) REFERENCES ORDERS(order_id),
-    FOREIGN KEY (product_id) REFERENCES MOBILEPHONES(mobile_id)
+    FOREIGN KEY (order_id) REFERENCES ORDERS(order_id)
 );
