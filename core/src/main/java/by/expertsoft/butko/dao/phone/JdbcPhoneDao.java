@@ -25,9 +25,9 @@ public class JdbcPhoneDao implements PhoneDao
     private static String SQL_INSERT_INTO_PRODUCERS = "INSERT INTO PRODUCERS (PRODUCER_NAME) " +
             "VALUES (:p_name)";
     private static String SQL_SELECT_ALL_RECORDS = "SELECT * FROM MOBILEPHONES INNER JOIN PRODUCERS "+
-            "WHERE mobilephones.producer_id = producers.producer_id";
+            "ON mobilephones.producer_id = producers.producer_id";
     private static String SQL_SELECT_MOBILE_BY_ID = "SELECT * FROM MOBILEPHONES INNER JOIN PRODUCERS " +
-            "WHERE mobile_id =:m_id AND mobilephones.producer_id = producers.producer_id";
+            "ON mobile_id =:m_id AND mobilephones.producer_id = producers.producer_id";
     private static String SQL_DELETE_FROM_MOBILEPHONES = "DELETE FROM MOBILEPHONES WHERE mobile_id = :m_id";
     private static String SQL_DELETE_FROM_PRODUCERS = "DELETE FROM PRODUCERS WHERE producer_id = :p_id";
     private static String SQL_SELECT_COUNT_BY_PRODUCER_ID ="SELECT COUNT(*) FROM MOBILEPHONES WHERE producer_id = :p_id";
@@ -42,12 +42,15 @@ public class JdbcPhoneDao implements PhoneDao
         Map<String, Object> params = new HashMap<String, Object>();
         GeneratedKeyHolder holder = new GeneratedKeyHolder();
         params.put("p_name", phone.getManufacturer().getName());
-        Integer p_id = namedParameterJdbcTemplate.queryForObject(SQL_FIND_PRODUCER_BY_NAME, params, Integer.class);
-        if(p_id <= 0){
+        List<Integer> pIdList = namedParameterJdbcTemplate.queryForList(SQL_FIND_PRODUCER_BY_NAME, params, Integer.class);
+        Integer pId;
+        if(pIdList.size() == 0){
             namedParameterJdbcTemplate.update(SQL_INSERT_INTO_PRODUCERS, new MapSqlParameterSource(params), holder);
-            p_id = holder.getKey().intValue();
+            pId = holder.getKey().intValue();
+        }else{
+            pId = pIdList.get(0);
         }
-        phone.getManufacturer().setId(p_id);
+        phone.getManufacturer().setId(pId);
         params.clear();
 
         params.put("name", phone.getName());
