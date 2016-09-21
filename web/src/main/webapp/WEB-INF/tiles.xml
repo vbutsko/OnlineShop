@@ -78,9 +78,10 @@
         <put-attribute name="body" value="/WEB-INF/views/pages/orderAdminPage/orderAdminPage.jsp"/>
     </definition>
 
-
+    <!-- 403 error page -->
+    <definition name="403" template="/WEB-INF/views/errors/403.jsp"/>
     <!-- for admin -->
-    <definition name="login" template="/WEB-INF/views/login/login.jsp"></definition>
+    <definition name="login" template="/WEB-INF/views/login/login.jsp"/>
 
 
 </tiles-definitions>

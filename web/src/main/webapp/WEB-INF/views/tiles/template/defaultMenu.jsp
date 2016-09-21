@@ -11,9 +11,9 @@
 <div class="well sidebar-nav">
     <ul class="nav nav-pills nav-stacked">
         <li class="menu nav-header" style="text-align: center; font-size: large; color: black">Menu</li>
-        <!--<s/ecurity:authorize url="/admin/">
-            <li class="admin"><a href="<s:url value="/admin/orderList"/>">Order List</a></li>
-        </secu/rity:authorize>-->
+        <security:authorize url="/admin/">
+            <li class="orderlist"><a href="<s:url value="/admin/orderlist"/>">Order List</a></li>
+        </security:authorize>
         <li class="home"><a href="<s:url value="/home"/>">HomePage</a></li>
         <li class="mobilephones"><a href="<s:url value="/mobilephones"/>">Product List</a></li>
         <li class="cart"><a href="<s:url value="/cart"/>">Your Cart</a></li>

@@ -7,34 +7,32 @@
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
 
-    <http pattern="/*" security="none"/>
+    <http pattern="/" security="none"/>
+    <http pattern="/home" security="none"/>
+    <http pattern="/login" security="none"/>
+    <http pattern="/403" security="none"/>
     <http pattern="/cart/**" security="none"/>
     <http pattern="/total/**" security="none"/>
     <http pattern="/mobilephones/**" security="none"/>
+    <http pattern="/order/**" security="none"/>
     <http auto-config="true" use-expressions="true">
 
         <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
-        <!--<access-denied-handler error-page="/403" /> -->
+        <access-denied-handler error-page="/403" />
 
         <form-login
                 login-page="/login"
-                default-target-url="/welcome"
+                default-target-url="/home"
                 authentication-failure-url="/login?error"
-                username-parameter="username"
-                password-parameter="password" />
+        />
 
-        <logout
-                logout-url="/logout"
-                logout-success-url="/login?logout"  />
-
-        <csrf/>
+        <logout logout-success-url="/login?logout"  />
     </http>
-
     <!-- Select users and user_roles from database -->
     <authentication-manager>
         <authentication-provider>
             <jdbc-user-service id="userService" data-source-ref="dataSource"
-                       users-by-username-query="select username, password, enabled from users where username=?"
+                       users-by-username-query="select username, password, CASE ENABLED WHEN 1 THEN 'true' ELSE 'false' END 'ENABLED' from users where username=?"
                        authorities-by-username-query="select username,role from user_roles where username=?"/>
         </authentication-provider>
     </authentication-manager>
