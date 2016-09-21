@@ -7,10 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
-
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <div class="well sidebar-nav">
     <ul class="nav nav-pills nav-stacked">
         <li class="menu nav-header" style="text-align: center; font-size: large; color: black">Menu</li>
+        <!--<s/ecurity:authorize url="/admin/">
+            <li class="admin"><a href="<s:url value="/admin/orderList"/>">Order List</a></li>
+        </secu/rity:authorize>-->
         <li class="home"><a href="<s:url value="/home"/>">HomePage</a></li>
         <li class="mobilephones"><a href="<s:url value="/mobilephones"/>">Product List</a></li>
         <li class="cart"><a href="<s:url value="/cart"/>">Your Cart</a></li>

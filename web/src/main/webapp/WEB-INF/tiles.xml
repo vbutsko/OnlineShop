@@ -77,4 +77,10 @@
         <put-attribute name="title" value="Order"/>
         <put-attribute name="body" value="/WEB-INF/views/pages/orderAdminPage/orderAdminPage.jsp"/>
     </definition>
+
+
+    <!-- for admin -->
+    <definition name="login" template="/WEB-INF/views/login/login.jsp"></definition>
+
+
 </tiles-definitions>
