@@ -11,7 +11,7 @@
 <div class="well sidebar-nav">
     <ul class="nav nav-pills nav-stacked">
         <li class="menu nav-header" style="text-align: center; font-size: large; color: black">Menu</li>
-        <security:authorize url="/admin/">
+        <security:authorize access="hasRole('ROLE_ADMIN')">
             <li class="orderlist"><a href="<s:url value="/admin/orderlist"/>">Order List</a></li>
         </security:authorize>
         <li class="home"><a href="<s:url value="/home"/>">HomePage</a></li>
