@@ -41,6 +41,9 @@
             <form method="GET" action="/web/order" >
                 <input type="submit" value="fill order information">
             </form>
+            <form method="get" action="/web/cart/clear">
+                <input type="submit" value="clear cart" name="delete">
+            </form>
         </div>
     </c:if>
 </div>

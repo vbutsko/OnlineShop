@@ -109,5 +109,10 @@ public class CartController {
         }
     }
 
-
+    @RequestMapping(value = "/clear", method = RequestMethod.GET, params = "delete")
+    public String clearCart()
+    {
+        cartService.clearCart();
+        return "redirect:/cart";
+    }
 }
