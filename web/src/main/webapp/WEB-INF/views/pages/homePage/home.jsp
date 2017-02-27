@@ -26,6 +26,10 @@
       Welcome! Thank for choosing our Online Shop. <br/>
       We hope that here you will find everything you need.
     </h1>
+    <h2>
+      <br>
+      Please, comment and subscribe our shop in social networks.
+    </h2>
 </div>
 
 
