@@ -68,4 +68,7 @@
             <button type="submit">Next</button>
         </div>
     </sf:form>
+    <form class="pull-left" method="get" action="/web/mobilephones">
+        <input type="submit" value="continue shopping">
+    </form>
 </div>
