@@ -28,7 +28,8 @@
     </h1>
     <h2>
       <br>
-      Please, comment and subscribe our shop in social networks.
+        Here you can buy a mobilephone
+        Please, comment and subscribe our shop in social networks.
     </h2>
 </div>
 
