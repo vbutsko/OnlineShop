@@ -26,6 +26,10 @@
       Welcome! Thank for choosing our Online Shop. <br/>
       We hope that here you will find everything you need.
     </h1>
+    <br/>
+    <h3>
+      Here you can buy a mobilephone
+    </h3>
 </div>
 
 
