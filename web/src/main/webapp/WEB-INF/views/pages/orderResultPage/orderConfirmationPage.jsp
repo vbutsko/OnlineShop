@@ -52,4 +52,7 @@
             <td>${order.personalInfo.phoneNumber}</td>
         </tr>
     </table>
+    <form class="pull-right" method="get" action="/web/mobilephones">
+        <input type="submit" value="back to shopping">
+    </form>
 </div>
